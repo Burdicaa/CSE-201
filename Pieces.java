@@ -10,8 +10,8 @@ public class Pieces {
 	private String[] comments;
 	private int commentcount;
 	
-	public Pieces(int year, String name, String museum, int worth, String description, 
-			String creator, String image) {
+	public Pieces(String creator, int year, String name, String image, String museum, int worth,
+			String description) {
 		this.year = year;
 		this.name = name;
 		this.museum = museum;
