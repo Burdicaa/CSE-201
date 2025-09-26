@@ -1,1 +1,6 @@
 CSE 201 Museum App
+The name of the App is "GalleryWalk".
+It is a Museum App that allows the users to browse museum pieces that have been submitted by other users.
+Within each piece, you can view the name, creator, creation date, worth, and which Museum it can be found at.
+The app allows the users to search by name, filter by certain attributes, and also sort the pieces in whatever
+order they want to see them in.
