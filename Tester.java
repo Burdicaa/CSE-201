@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class Tester {
 
 	public static void main(String[] args) {
-		Pieces test = new Pieces(c, 1990, n, i, m, 1000, d);
+		Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
 		System.out.println(test);
 		
 		String s1 = "This is a test";
@@ -46,4 +46,5 @@ public class Tester {
 	}
 
 }
+
 
