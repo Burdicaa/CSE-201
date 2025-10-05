@@ -1,6 +1,17 @@
-<project name="MyProject" default="compile">
-  <target name="compile">
-    <mkdir dir="bin"/>
-    <javac srcdir="." destdir="bin"/>
-  </target>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CSE-201" default="compile" basedir=".">
+    <property name="src.dir" value="." />
+    <property name="build.dir" value="bin" />
+
+    <target name="init">
+        <mkdir dir="${build.dir}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}" />
+    </target>
 </project>
