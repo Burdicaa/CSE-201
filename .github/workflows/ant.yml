@@ -21,5 +21,11 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Debug:Show files
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "List all files:"
+        ls -R
     - name: Build with Ant
       run: ant -noinput -buildfile .github/workflows/build.xml
