@@ -45,41 +45,41 @@ public class UI {
 		nameSubmission.setBounds(380, 10, 100, 100);
 		JLabel creatorSubmission = new JLabel();
 		creatorSubmission.setText("Creator of piece: ");
-		creatorSubmission.setBounds(380, 50, 100, 100);
+		creatorSubmission.setBounds(380, 40, 100, 100);
 		JLabel yearSubmission = new JLabel();
 		yearSubmission.setText("Year created: ");
-		yearSubmission.setBounds(380, 90, 100, 100);
+		yearSubmission.setBounds(380, 70, 100, 100);
 		JLabel worthSubmission = new JLabel();
 		worthSubmission.setText("Worth: ");
-		worthSubmission.setBounds(380, 130, 100, 100);
+		worthSubmission.setBounds(380, 100, 100, 100);
 		JLabel museumSubmission = new JLabel();
 		museumSubmission.setText("Museum located: ");
-		museumSubmission.setBounds(380, 170, 100, 100);
+		museumSubmission.setBounds(380, 130, 100, 100);
 		JLabel imageSubmission = new JLabel();
 		imageSubmission.setText("Image URL: ");
-		imageSubmission.setBounds(380, 210, 100, 100);
+		imageSubmission.setBounds(380, 160, 100, 100);
 		JLabel descSubmission = new JLabel();
 		descSubmission.setText("Museum located: ");
-		descSubmission.setBounds(380, 250, 100, 100);
+		descSubmission.setBounds(380, 190, 100, 100);
 		
 		JTextField name = new JTextField();
-		name.setBounds(480, 50, 130, 30);
+		name.setBounds(480, 40, 130, 30);
 		JTextField creator = new JTextField();
-		creator.setBounds(480, 90, 130, 30);
+		creator.setBounds(480, 70, 130, 30);
 		JTextField year = new JTextField();
-		year.setBounds(480, 130, 130, 30);
+		year.setBounds(480, 100, 130, 30);
 		JTextField worth = new JTextField();
-		worth.setBounds(480, 170, 130, 30);
+		worth.setBounds(480, 130, 130, 30);
 		JTextField museum = new JTextField();
-		museum.setBounds(480, 210, 130, 30);
+		museum.setBounds(480, 160, 130, 30);
 		JTextField image = new JTextField();
-		image.setBounds(480, 250, 130, 30);
+		image.setBounds(480, 190, 130, 30);
 		JTextArea desc = new JTextArea(5, 25);
 		desc.setLineWrap(true);
 		desc.setWrapStyleWord(true);
-		desc.setAutoscrolls(true);
-		desc.setBounds(380, 330, 230, 100);
-		
+		JScrollPane descScroll = new JScrollPane(desc);
+		descScroll.setBounds(380, 250, 230, 100);
+
 		// Adds the text to the form
 		form.add(nameSubmission);	
 		form.add(creatorSubmission);
@@ -94,7 +94,7 @@ public class UI {
 		form.add(worth);
 		form.add(museum);
 		form.add(image);
-		form.add(desc);
+		form.add(descScroll);
 		
 	}
 	
