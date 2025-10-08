@@ -42,13 +42,21 @@ public class UI {
 		// Allows user to enter text for name of piece
 		JLabel nameSubmission = new JLabel();
 		nameSubmission.setText("Name of piece: ");
-		nameSubmission.setBounds(400, 10, 100, 100);
+		nameSubmission.setBounds(380, 10, 100, 100);
+		JLabel creatorSubmission = new JLabel();
+		creatorSubmission.setText("Creator of piece: ");
+		creatorSubmission.setBounds(380, 50, 100, 100);
 		
 		JTextField name = new JTextField();
-		name.setBounds(500, 50, 130, 30);
+		name.setBounds(480, 50, 130, 30);
+		JTextField creator = new JTextField();
+		creator.setBounds(480, 90, 130, 30);
 		
+		// Adds the text to the form
 		form.add(nameSubmission);	
+		form.add(creatorSubmission);
 		form.add(name);
+		form.add(creator);
 		
 	}
 	
@@ -64,6 +72,7 @@ public class UI {
         
         // Put login UI here (The JPanel is where we put all the buttons and input things
         JPanel p = new JPanel();
+        f.add(p);
         
         // Creates the login submission button and adds it to the panel
         JButton skipLogin = new JButton("Skip Login");
@@ -82,7 +91,6 @@ public class UI {
         		home();
         	}
         });
-        f.add(p);
         
         }
 
