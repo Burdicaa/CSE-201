@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.FileWriter;
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -96,6 +97,26 @@ public class UI {
 		form.add(image);
 		form.add(descScroll);
 		
+		// Submit button to properly add all data into a holding file for confirmation
+		JButton submit = new JButton("Submit");
+		submit.setBounds(440, 350, 100, 25);
+		form.add(submit);
+		JLabel submitSuccess = new JLabel("Form Successfully Submitted");
+		submitSuccess.setBounds(410, 380, 230, 20);
+		submitSuccess.setForeground(Color.BLUE);
+		submitSuccess.setOpaque(true);
+		form.add(submitSuccess);
+		submitSuccess.setVisible(false);
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Opens and write data into a file
+				
+				// Displays text telling user form was submitted successfully
+				submitSuccess.setVisible(true);
+			}
+		});
+	
 	}
 	
 	
