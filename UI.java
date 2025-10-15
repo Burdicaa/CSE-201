@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.awt.BorderLayout;
 import javax.swing.*;
@@ -134,6 +137,7 @@ public class UI {
 					submission.write(worth.getText() + "\n");
 					submission.write(desc.getText() + "\n");
 					submission.close();
+					file.close();
 				} catch (IOException q) {
 					System.out.println("An error occurred: " + q.getMessage());
 				}
@@ -153,29 +157,81 @@ public class UI {
 	}
 	
 	
-	public static void login() {
+	public static void login() throws FileNotFoundException {
 		// Creates the login screen
 		JFrame f = new JFrame("GalleryWalk"); 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
-        f.setLayout(new BorderLayout());
+//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
+		f.setSize(1000, 800);
+        f.setLayout(null);
         f.setVisible(true);
+//        
+//        int height = (int) screenSize.getHeight();
+//        int width = (int) screenSize.getWidth();
+                
+        // Creates the Login TextFields
+        JLabel username = new JLabel("Username: ");
+        username.setBounds(380, 10, 100, 100);
+        JLabel password = new JLabel("Password: ");
+        password.setBounds(380, 40, 100, 100);
+        JTextField usernameBox = new JTextField();
+        usernameBox.setBounds(450, 40, 160, 30);
+        JTextField passwordBox = new JTextField();
+        passwordBox.setBounds(450, 70, 160, 30);
+        f.add(username);
+        f.add(usernameBox);
+        f.add(password);
+        f.add(passwordBox);
         
+        // Create login submission button
+        JButton login = new JButton("Login");
+        login.setBounds(440, 110, 100, 25);
+        f.add(login);
         
-        // Put login UI here (The JPanel is where we put all the buttons and input things
-        JPanel p = new JPanel();
-        f.add(p);
-        
-        // Creates the login submission button and adds it to the panel
+        // Creates the skip login submission button and adds it to the panel
         JButton skipLogin = new JButton("Skip Login");
-        skipLogin.setSize(50, 25);
         skipLogin.setOpaque(false);
         skipLogin.setContentAreaFilled(false);
         skipLogin.setBorderPainted(false);
-        p.add(skipLogin);
+        skipLogin.setBounds(440, 140, 100, 25);
+        f.add(skipLogin);
+        f.repaint();
+        
+        // Fail to login Text
+        JLabel failedLogin = new JLabel("Failed to Log in, Try Again");
+        failedLogin.setBounds(420, 150, 200, 100);
+        failedLogin.setForeground(Color.RED);
+        failedLogin.setVisible(false);
+        f.add(failedLogin);
         
         // Add an if statement encompassing this to check if account is real
+        login.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+            	File file = new File("DataFiles/Accounts.txt");
+            	Scanner scanner = null;
+				try {
+					scanner = new Scanner(file);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	while (scanner.hasNextLine()) {
+            		if (scanner.nextLine().equals(usernameBox.getText())) {
+            			if (scanner.nextLine().equals(passwordBox.getText())) {
+            				f.setVisible(false);
+            				home();
+            			}
+            		}
+            	}
+            	failedLogin.setVisible(true);
+            	f.repaint();
+            	scanner.close();
+        	}
+        });
+        
+        
         // Checks for button press and changes screen if check returns true
         skipLogin.addActionListener(new ActionListener() {
         	@Override

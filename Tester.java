@@ -1,10 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class Tester {
 
-	public static void main(String[] args) {
-		UI graphic = new UI();
-		graphic.login();
+	public static void main(String[] args) throws FileNotFoundException {
+		UI.login();
 		
 		// Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
 		// System.out.println(test);
