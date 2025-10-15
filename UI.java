@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -101,19 +103,50 @@ public class UI {
 		JButton submit = new JButton("Submit");
 		submit.setBounds(440, 350, 100, 25);
 		form.add(submit);
+		
+		// Submission Successful Indicator Text
 		JLabel submitSuccess = new JLabel("Form Successfully Submitted");
 		submitSuccess.setBounds(410, 380, 230, 20);
 		submitSuccess.setForeground(Color.BLUE);
 		submitSuccess.setOpaque(true);
 		form.add(submitSuccess);
 		submitSuccess.setVisible(false);
+		
+		// Home Button
+		JButton home = new JButton("Home");
+		home.setBounds(100, 10, 100, 25);
+		form.add(home);
+		
+		// Actions after pressing submit button
 		submit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Opens and write data into a file
-				
+				try {
+					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", true);
+					RandomAccessFile file = new RandomAccessFile("DataFiles/Submissions.txt", "rw");
+					file.seek(file.length());
+					submission.write(creator.getText() + "\n");
+					submission.write(year.getText() + "\n");
+					submission.write(name.getText() + "\n");
+					submission.write("Pictures/" + image.getText() + "\n");
+					submission.write(museum.getText() + "\n");
+					submission.write(worth.getText() + "\n");
+					submission.write(desc.getText() + "\n");
+					submission.close();
+				} catch (IOException q) {
+					System.out.println("An error occurred: " + q.getMessage());
+				}
 				// Displays text telling user form was submitted successfully
 				submitSuccess.setVisible(true);
+			}
+		});
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				form.setVisible(false);
+				home();
 			}
 		});
 	
@@ -122,9 +155,10 @@ public class UI {
 	
 	public static void login() {
 		// Creates the login screen
-		JFrame f = new JFrame("GalleryWalk");  
+		JFrame f = new JFrame("GalleryWalk"); 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(1000, 800);
+		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
         f.setLayout(new BorderLayout());
         f.setVisible(true);
         
