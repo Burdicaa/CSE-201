@@ -85,6 +85,19 @@ public class Pieces {
 		}
 	}
 	
+	public String[] toArray() {
+		String[] result = new String[7];
+		result[0] = creator;
+		result[1] = "" + year;
+		result[2] = name;
+		result[3] = image;
+		result[4] = museum;
+		result[5] = "" + worth;
+		result[6] = description;
+
+		return result;
+	}
+	
 	public String toString() {
 		String f = String.format("\nName: %s \nCreator: %s \nYear: %d \nMuseum: %s \nWorth: $%d"
 				+ " \nDescription: %s", name, creator, year, museum, worth, description);

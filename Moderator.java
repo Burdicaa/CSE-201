@@ -1,5 +1,5 @@
 
-public class Moderator {
+public class Moderator extends User{
 
 	private String user;
 	private String password;
