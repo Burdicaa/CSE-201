@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 
 public class UI {
 	public static void home() {
+
 		// Creates the home page
 		JFrame h = new JFrame("GalleryWalk");
 		h.setSize(1000,800);
@@ -25,10 +26,24 @@ public class UI {
 		JPanel p = new JPanel();
 		h.add(p);
 		
+		JButton Search = new JButton("Search");
+		Search.setSize(50, 25);
+		p.add(Search);
+		
 		// Creates a button that allows user to change to piece submission form
 		JButton submitPiece = new JButton("Create Piece Submission Form");
-		submitPiece.setSize(50, 25);
+		submitPiece.setSize(50, 50);
 		p.add(submitPiece);
+		
+		// Checks for button press and changes screen
+        Search.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		h.setVisible(false);
+        		// Add Function to swap to Search
+        	}
+        });
+		
 		
 		// Checks for button press and changes screen
         submitPiece.addActionListener(new ActionListener() {
@@ -39,7 +54,7 @@ public class UI {
         	}
         });
 	}
-	
+
 	public static void pieceForm() {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
@@ -157,6 +172,19 @@ public class UI {
 	
 	}
 	
+	public static void pieceReview() {
+		JFrame review = new JFrame();
+		review.setSize(1000, 800);
+		review.setLayout(null);
+		review.setVisible(true);
+	}
+
+	public static void createUser() {
+		JFrame createU = new JFrame();
+		createU.setSize(1000, 800);
+		createU.setLayout(null);
+		createU.setVisible(true);
+	}
 	
 	public static void login() throws FileNotFoundException {
 		// Creates the login screen
@@ -191,18 +219,27 @@ public class UI {
         login.setBounds(440, 110, 100, 25);
         f.add(login);
         
+        // Create User button
+        JButton createU = new JButton("Create User");
+        createU.setBounds(415, 140, 150, 25);
+        createU.setOpaque(false);
+        createU.setContentAreaFilled(false);
+        createU.setBorderPainted(false);
+        f.add(createU);
+        
+        
         // Creates the skip login submission button and adds it to the panel
         JButton skipLogin = new JButton("Skip Login");
         skipLogin.setOpaque(false);
         skipLogin.setContentAreaFilled(false);
         skipLogin.setBorderPainted(false);
-        skipLogin.setBounds(440, 140, 100, 25);
+        skipLogin.setBounds(440, 170, 100, 25);
         f.add(skipLogin);
         f.repaint();
         
         // Fail to login Text
         JLabel failedLogin = new JLabel("Failed to Log in, Try Again");
-        failedLogin.setBounds(420, 150, 200, 100);
+        failedLogin.setBounds(420, 160, 200, 100);
         failedLogin.setForeground(Color.RED);
         failedLogin.setVisible(false);
         f.add(failedLogin);
@@ -233,6 +270,13 @@ public class UI {
         	}
         });
         
+        createU.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		f.setVisible(false);
+        		createUser();
+        	}
+        });
         
         // Checks for button press and changes screen if check returns true
         skipLogin.addActionListener(new ActionListener() {

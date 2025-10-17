@@ -1,4 +1,8 @@
 Tester1
 password
+Admin: false
+Mod: false
 Tester2
 password
+Admin: false
+Mod: false
