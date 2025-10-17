@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import java.awt.BorderLayout;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.*;
 
 import java.awt.event.ActionEvent;
@@ -117,7 +118,7 @@ public class UI {
 		
 		// Home Button
 		JButton home = new JButton("Home");
-		home.setBounds(100, 10, 100, 25);
+		home.setBounds(10, 10, 100, 25);
 		form.add(home);
 		
 		// Actions after pressing submit button
@@ -165,6 +166,7 @@ public class UI {
 //		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
 		f.setSize(1000, 800);
         f.setLayout(null);
+        f.getContentPane().setBackground(Color.decode("#A9CD5A"));
         f.setVisible(true);
 //        
 //        int height = (int) screenSize.getHeight();
