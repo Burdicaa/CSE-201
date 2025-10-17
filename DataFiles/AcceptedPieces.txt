@@ -1,1 +1,3 @@
-
+[a, 1, b, c, d, 2, e]
+[b, 3, ad, vs, cx, as]
+[nl, 500, asdc, cd, alf]
