@@ -180,10 +180,112 @@ public class UI {
 	}
 
 	public static void createUser() {
-		JFrame createU = new JFrame();
-		createU.setSize(1000, 800);
-		createU.setLayout(null);
-		createU.setVisible(true);
+		JFrame createU = new JFrame("Create User");
+	    createU.setSize(1000, 800);
+	    createU.setLayout(null);
+	    createU.getContentPane().setBackground(Color.decode("#D5F5E3"));
+	    createU.setVisible(true);
+
+	    // Title
+	    JLabel title = new JLabel("Create Your Account");
+	    title.setBounds(420, 30, 300, 30);
+	    title.setFont(new Font("Arial", Font.BOLD, 16));
+	    createU.add(title);
+
+	    // Username field
+	    JLabel usernameLabel = new JLabel("Username:");
+	    usernameLabel.setBounds(370, 80, 100, 30);
+	    createU.add(usernameLabel);
+	    JTextField usernameBox = new JTextField();
+	    usernameBox.setBounds(460, 80, 160, 25);
+	    createU.add(usernameBox);
+
+	    // Password field
+	    JLabel passwordLabel = new JLabel("Password:");
+	    passwordLabel.setBounds(370, 120, 100, 30);
+	    createU.add(passwordLabel);
+	    JPasswordField passwordBox = new JPasswordField();
+	    passwordBox.setBounds(460, 120, 160, 25);
+	    createU.add(passwordBox);
+
+	    // Confirm Password field
+	    JLabel confirmLabel = new JLabel("Confirm Password:");
+	    confirmLabel.setBounds(340, 160, 150, 30);
+	    createU.add(confirmLabel);
+	    JPasswordField confirmBox = new JPasswordField();
+	    confirmBox.setBounds(460, 160, 160, 25);
+	    createU.add(confirmBox);
+
+	    // Message label
+	    JLabel messageLabel = new JLabel("");
+	    messageLabel.setBounds(400, 200, 400, 30);
+	    messageLabel.setForeground(Color.RED);
+	    createU.add(messageLabel);
+
+	    // Submit button
+	    JButton submitButton = new JButton("Submit");
+	    submitButton.setBounds(450, 240, 100, 25);
+	    createU.add(submitButton);
+
+	    // Back button
+	    JButton backButton = new JButton("Back to Login");
+	    backButton.setBounds(440, 280, 120, 25);
+	    createU.add(backButton);
+
+	    // When user clicks Submit
+	    submitButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            String username = usernameBox.getText().trim();
+	            String password = new String(passwordBox.getPassword());
+	            String confirm = new String(confirmBox.getPassword());
+
+	            if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+	            	messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Please fill out all fields.");
+	                return;
+	            }
+
+	            if (!password.equals(confirm)) {
+	            	messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Passwords do not match.");
+	                return;
+	            }
+
+	          
+	            // Save to Accounts.txt
+	            try {
+	                FileWriter writer = new FileWriter("DataFiles/Accounts.txt", true);
+	                RandomAccessFile file = new RandomAccessFile("DataFiles/Accounts.txt", "rw");
+	                file.seek(file.length());
+	                writer.write(username + "\n");
+	                writer.write(password + "\n");
+	                writer.close();
+	                file.close();
+
+	                messageLabel.setForeground(Color.BLUE);
+	                messageLabel.setText("Account created successfully!");
+	            } catch (IOException ex) {
+	            	messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Error creating account.");
+	            }
+	        }
+	    });
+
+	    // Go back to login screen
+	    backButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            createU.setVisible(false);
+	            try {
+	                login();
+	            } catch (FileNotFoundException ex) {
+	            	messageLabel.setForeground(Color.RED);
+	            	messageLabel.setText("Error creating account.");
+	            }
+	        }
+	    });
+
 	}
 	
 	public static void login() throws FileNotFoundException {

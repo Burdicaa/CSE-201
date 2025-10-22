@@ -10,8 +10,8 @@ public class Tester {
 		System.out.println(Arrays.toString(p.toArray()));
 		System.out.println(p.toArray());
 		
-		// Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
-		// System.out.println(test);
+		Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
+		System.out.println(test);
 		
 		// String s1 = "This is a test";
 		// String s2 = "This is a test2";
