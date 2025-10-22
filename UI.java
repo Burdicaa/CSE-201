@@ -35,6 +35,10 @@ public class UI {
 		submitPiece.setSize(50, 50);
 		p.add(submitPiece);
 		
+		JButton gallery = new JButton("Gallery");
+		gallery.setSize(50,50);
+		p.add(gallery);
+		
 		// Checks for button press and changes screen
         Search.addActionListener(new ActionListener() {
         	@Override
@@ -51,6 +55,15 @@ public class UI {
         	public void actionPerformed(ActionEvent e) {
         		h.setVisible(false);
         		pieceForm();
+        	}
+        });
+
+        gallery.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		h.setVisible(false);
+        		Gallery f = new Gallery("Datafiles/AcceptedPieces.txt");
+        		f.disp();
         	}
         });
 	}
