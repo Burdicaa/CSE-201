@@ -6,12 +6,12 @@ public class Tester {
 	public static void main(String[] args) throws FileNotFoundException {
 		UI.login();
 		
-		Pieces p = new Pieces("a", 1, "b", "c", "d", 2, "e");
-		System.out.println(Arrays.toString(p.toArray()));
-		System.out.println(p.toArray());
-		
-		Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
-		System.out.println(test);
+//		Pieces p = new Pieces("a", 1, "b", "c", "d", 2, "e");
+//		System.out.println(Arrays.toString(p.toArray()));
+//		System.out.println(p.toArray());
+//		
+//		Pieces test = new Pieces("c", 1990, "n", "i", "m", 1000, "d");
+//		System.out.println(test);
 		
 		// String s1 = "This is a test";
 		// String s2 = "This is a test2";
