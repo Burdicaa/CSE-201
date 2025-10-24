@@ -1,39 +1,16 @@
 Tester1
 password
-Admin: false
+Admin: true
 Mod: false
 Tester2
 password
 Admin: false
-Mod: falseoknice
-HI
-oknice
-HI
-OMG WHAT IS THIS
-OKOK
-OMG WHAT IS THIS
-OKOK
-Tom
-OKOK
-Tom
-OKOK
-Tom
-OKOK
-Ziteng Li
-WEGOTAPASSWORD!
-u2
-p1
-u2
-p1
-u2
-p1
-u1
-p1
-u1
-p1
-u1
-p1
-u1
-p1
-123
-123
+Mod: false
+user3
+password
+Admin: false
+Mod: false
+user4
+password
+Admin: false
+Mod: false
