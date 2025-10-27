@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Gallery {
 	
-    private ArrayList<ArtPiece> pieces;
+    public ArrayList<ArtPiece> pieces;
 
     public Gallery(String fileName) {
         this.pieces = loadPieces(fileName);
@@ -191,3 +191,4 @@ public class Gallery {
         }
     }
 }
+
