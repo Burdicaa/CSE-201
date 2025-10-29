@@ -90,6 +90,14 @@ public class UI {
         
 	}
 
+
+	public static void searchPage() {
+		JFrame sPage = new JFrame("Search");
+		sPage.setSize(1000, 800);
+		sPage.setLayout(null);
+		sPage.setVisible(true);
+	}
+	
 	public static void pieceForm(String user, String pass, String admin, String mod) {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
@@ -431,5 +439,6 @@ public class UI {
         }
 
 }
+
 
 
