@@ -65,7 +65,7 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		searchPage();
+        		searchPage(user, pass, admin, mod);
         	}
         });
 		
@@ -91,7 +91,7 @@ public class UI {
 	}
 
 
-	public static void searchPage() {
+	public static void searchPage(String user, String pass, String admin, String mod) {
 		JFrame sPage = new JFrame("Search");
 		sPage.setSize(1000, 800);
 		sPage.setLayout(null);
