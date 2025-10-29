@@ -354,7 +354,7 @@ public class UI {
         password.setBounds(380, 40, 100, 100);
         JTextField usernameBox = new JTextField();
         usernameBox.setBounds(450, 40, 160, 30);
-        JTextField passwordBox = new JTextField();
+        JPasswordField passwordBox = new JPasswordField();
         passwordBox.setBounds(450, 70, 160, 30);
         loginf.add(username);
         loginf.add(usernameBox);
