@@ -14,17 +14,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UI {
-	public static void home() {
+	public static void home(String user, String pass, String admin, String mod) {
 
 		// Creates the home page
-		JFrame h = new JFrame("GalleryWalk");
-		h.setSize(1000,800);
-		h.setLayout(new BorderLayout());
-		h.setVisible(true);
+		JFrame home = new JFrame("GalleryWalk");
+		home.setSize(1000,800);
+		home.setLayout(new BorderLayout());
+		home.setVisible(true);
 		
 		// Creates a panel for all button in home
 		JPanel p = new JPanel();
-		h.add(p);
+		home.add(p);
 		
 		JButton Search = new JButton("Search");
 		Search.setSize(50, 25);
@@ -35,11 +35,30 @@ public class UI {
 		submitPiece.setSize(50, 50);
 		p.add(submitPiece);
 		
+		JButton gallery = new JButton("Gallery");
+		gallery.setSize(50,50);
+		p.add(gallery);
+		
+		if (admin != null && admin.equals("Admin: true")) {
+			JButton pieceReview = new JButton("Review Piece Applications");
+			pieceReview.setSize(50,50);
+			p.add(pieceReview);
+			
+	        pieceReview.addActionListener(new ActionListener() {
+	        	@Override
+	        	public void actionPerformed(ActionEvent e) {
+	        		home.setVisible(false);
+	        		pieceReview();
+	        	}
+	        });
+		}
+		
+		
 		// Checks for button press and changes screen
         Search.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		h.setVisible(false);
+        		home.setVisible(false);
         		// Add Function to swap to Search
         	}
         });
@@ -49,13 +68,23 @@ public class UI {
         submitPiece.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		h.setVisible(false);
-        		pieceForm();
+        		home.setVisible(false);
+        		pieceForm(user, pass, admin, mod);
         	}
         });
+
+        gallery.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		home.setVisible(false);
+        		Gallery f = new Gallery("Datafiles/AcceptedPieces.txt");
+        		f.disp();
+        	}
+        });
+        
 	}
 
-	public static void pieceForm() {
+	public static void pieceForm(String user, String pass, String admin, String mod) {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
 		form.setLayout(null);
@@ -166,7 +195,7 @@ public class UI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				form.setVisible(false);
-				home();
+				home(user, pass, admin, mod);
 			}
 		});
 	
@@ -260,6 +289,8 @@ public class UI {
 	                file.seek(file.length());
 	                writer.write(username + "\n");
 	                writer.write(password + "\n");
+	                writer.write("Admin: false\n" );
+	                writer.write("Mod: false\n" );
 	                writer.close();
 	                file.close();
 
@@ -290,14 +321,14 @@ public class UI {
 	
 	public static void login() throws FileNotFoundException {
 		// Creates the login screen
-		JFrame f = new JFrame("GalleryWalk"); 
+		JFrame loginf = new JFrame("GalleryWalk"); 
 //		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
-		f.setSize(1000, 800);
-        f.setLayout(null);
-        f.getContentPane().setBackground(Color.decode("#A9CD5A"));
-        f.setVisible(true);
+		loginf.setSize(1000, 800);
+        loginf.setLayout(null);
+        loginf.getContentPane().setBackground(Color.decode("#A9CD5A"));
+        loginf.setVisible(true);
 //        
 //        int height = (int) screenSize.getHeight();
 //        int width = (int) screenSize.getWidth();
@@ -311,15 +342,15 @@ public class UI {
         usernameBox.setBounds(450, 40, 160, 30);
         JTextField passwordBox = new JTextField();
         passwordBox.setBounds(450, 70, 160, 30);
-        f.add(username);
-        f.add(usernameBox);
-        f.add(password);
-        f.add(passwordBox);
+        loginf.add(username);
+        loginf.add(usernameBox);
+        loginf.add(password);
+        loginf.add(passwordBox);
         
         // Create login submission button
         JButton login = new JButton("Login");
         login.setBounds(440, 110, 100, 25);
-        f.add(login);
+        loginf.add(login);
         
         // Create User button
         JButton createU = new JButton("Create User");
@@ -327,7 +358,7 @@ public class UI {
         createU.setOpaque(false);
         createU.setContentAreaFilled(false);
         createU.setBorderPainted(false);
-        f.add(createU);
+        loginf.add(createU);
         
         
         // Creates the skip login submission button and adds it to the panel
@@ -336,15 +367,15 @@ public class UI {
         skipLogin.setContentAreaFilled(false);
         skipLogin.setBorderPainted(false);
         skipLogin.setBounds(440, 170, 100, 25);
-        f.add(skipLogin);
-        f.repaint();
+        loginf.add(skipLogin);
+        loginf.repaint();
         
         // Fail to login Text
         JLabel failedLogin = new JLabel("Failed to Log in, Try Again");
         failedLogin.setBounds(420, 160, 200, 100);
         failedLogin.setForeground(Color.RED);
         failedLogin.setVisible(false);
-        f.add(failedLogin);
+        loginf.add(failedLogin);
         
         // Add an if statement encompassing this to check if account is real
         login.addActionListener(new ActionListener() {
@@ -361,13 +392,15 @@ public class UI {
             	while (scanner.hasNextLine()) {
             		if (scanner.nextLine().equals(usernameBox.getText())) {
             			if (scanner.nextLine().equals(passwordBox.getText())) {
-            				f.setVisible(false);
-            				home();
+            				String admin = scanner.nextLine();
+            				String mod = scanner.nextLine();
+            				loginf.setVisible(false);
+            				home(usernameBox.getText(), passwordBox.getText(), admin, mod);
             			}
             		}
             	}
             	failedLogin.setVisible(true);
-            	f.repaint();
+            	loginf.repaint();
             	scanner.close();
         	}
         });
@@ -375,7 +408,7 @@ public class UI {
         createU.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		f.setVisible(false);
+        		loginf.setVisible(false);
         		createUser();
         	}
         });
@@ -384,8 +417,8 @@ public class UI {
         skipLogin.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		f.setVisible(false);
-        		home();
+        		loginf.setVisible(false);
+        		home(null, null, null, null);
         	}
         });
         
