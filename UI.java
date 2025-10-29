@@ -65,7 +65,7 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		// Add Function to swap to Search
+        		searchPage();
         	}
         });
 		
@@ -439,6 +439,7 @@ public class UI {
         }
 
 }
+
 
 
 
