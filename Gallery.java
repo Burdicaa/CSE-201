@@ -13,7 +13,7 @@ public class Gallery {
 
     public void disp() {
         JFrame frame = new JFrame("Art Gallery Viewer");
-        frame.setSize(800, 600);
+        frame.setSize(1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
