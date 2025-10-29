@@ -24,24 +24,30 @@ public class UI {
 		
 		// Creates a panel for all button in home
 		JPanel p = new JPanel();
-		home.add(p);
-		
-		JButton Search = new JButton("Search");
-		Search.setSize(50, 25);
-		p.add(Search);
+		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		home.add(p,BorderLayout.CENTER);
+
+		JButton search = new JButton("Search");
+		search.setSize(50, 25);
+		search.setAlignmentX(Component.CENTER_ALIGNMENT);
+		p.add(search);
 		
 		// Creates a button that allows user to change to piece submission form
 		JButton submitPiece = new JButton("Create Piece Submission Form");
 		submitPiece.setSize(50, 50);
+		submitPiece.setAlignmentX(Component.CENTER_ALIGNMENT);
 		p.add(submitPiece);
 		
 		JButton gallery = new JButton("Gallery");
 		gallery.setSize(50,50);
+		gallery.setAlignmentX(Component.CENTER_ALIGNMENT);
 		p.add(gallery);
+		
 		
 		if (admin != null && admin.equals("Admin: true")) {
 			JButton pieceReview = new JButton("Review Piece Applications");
 			pieceReview.setSize(50,50);
+			pieceReview.setAlignmentX(Component.CENTER_ALIGNMENT);
 			p.add(pieceReview);
 			
 	        pieceReview.addActionListener(new ActionListener() {
@@ -55,11 +61,11 @@ public class UI {
 		
 		
 		// Checks for button press and changes screen
-        Search.addActionListener(new ActionListener() {
+        search.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		// Add Function to swap to Search
+        		searchPage();
         	}
         });
 		
@@ -84,6 +90,14 @@ public class UI {
         
 	}
 
+
+	public static void searchPage() {
+		JFrame sPage = new JFrame("Search");
+		sPage.setSize(1000, 800);
+		sPage.setLayout(null);
+		sPage.setVisible(true);
+	}
+	
 	public static void pieceForm(String user, String pass, String admin, String mod) {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
@@ -425,5 +439,7 @@ public class UI {
         }
 
 }
+
+
 
 
