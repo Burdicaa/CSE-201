@@ -101,7 +101,7 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		Gallery f = new Gallery("Datafiles/AcceptedPieces.txt");
+        		Gallery f = new Gallery(user, pass, admin, mod, "Datafiles/AcceptedPieces.txt");
         		f.disp();
         	}
         });

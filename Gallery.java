@@ -1,13 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 
 public class Gallery {
 	
     public ArrayList<ArtPiece> pieces;
+    public String usr;
+    public String pass;
+    public String admin;
+    public String mod;
 
-    public Gallery(String fileName) {
+    public Gallery(String usr, String pass, String admin, String mod, String fileName) {
+    	this.usr = usr;
+    	this.pass = pass;
+    	this.admin = admin;
+    	this.mod = mod;
         this.pieces = loadPieces(fileName);
     }
 
@@ -18,6 +28,18 @@ public class Gallery {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        
+        JButton home = new JButton("Home");
+        home.setSize(50,25);
+        mainPanel.add(home);
+        
+        home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				UI.home(usr, pass, admin, mod);
+			}
+		});
 
         for (ArtPiece art : pieces) {
             mainPanel.add(createArtPanel(art));
