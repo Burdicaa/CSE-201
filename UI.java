@@ -25,7 +25,7 @@ public class UI {
 		// Creates a panel for all button in home
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-		home.add(p,BorderLayout.CENTER);
+		home.add(p, BorderLayout.CENTER);
 
 		JButton search = new JButton("Search");
 		search.setSize(50, 25);
@@ -50,6 +50,11 @@ public class UI {
 			pieceReview.setAlignmentX(Component.CENTER_ALIGNMENT);
 			p.add(pieceReview);
 			
+			JButton modUser = new JButton("Change User to Moderator");
+			modUser.setSize(50, 50);
+			modUser.setAlignmentX(Component.CENTER_ALIGNMENT);
+			p.add(modUser);
+			
 	        pieceReview.addActionListener(new ActionListener() {
 	        	@Override
 	        	public void actionPerformed(ActionEvent e) {
@@ -57,7 +62,20 @@ public class UI {
 	        		pieceReview();
 	        	}
 	        });
+	        
+	        modUser.addActionListener(new ActionListener() {
+	        	@Override
+	        	public void actionPerformed(ActionEvent e) {
+	        		home.setVisible(false);
+	        		modUser();
+	        	}
+	        });
 		}
+		
+		JButton logout = new JButton("Logout");
+		logout.setSize(50,25);
+		logout.setAlignmentX(Component.CENTER_ALIGNMENT);
+		p.add(logout);
 		
 		
 		// Checks for button press and changes screen
@@ -85,6 +103,19 @@ public class UI {
         		home.setVisible(false);
         		Gallery f = new Gallery("Datafiles/AcceptedPieces.txt");
         		f.disp();
+        	}
+        });
+        
+        logout.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		home.setVisible(false);
+        		try {
+					login();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         	}
         });
         
@@ -199,7 +230,7 @@ public class UI {
 					submission.write(creator.getText() + "\n");
 					submission.write(year.getText() + "\n");
 					submission.write(name.getText() + "\n");
-					submission.write("Pictures/" + image.getText() + "\n");
+					submission.write(image.getText() + "\n");
 					submission.write(museum.getText() + "\n");
 					submission.write(worth.getText() + "\n");
 					submission.write(desc.getText() + "\n");
@@ -228,6 +259,8 @@ public class UI {
 		review.setSize(1000, 800);
 		review.setLayout(null);
 		review.setVisible(true);
+		
+		
 	}
 
 	public static void createUser() {
@@ -339,6 +372,10 @@ public class UI {
 	        }
 	    });
 
+	}
+	
+	public static void modUser() {
+		
 	}
 	
 	public static void login() throws FileNotFoundException {
