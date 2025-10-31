@@ -59,7 +59,7 @@ public class UI {
 	        	@Override
 	        	public void actionPerformed(ActionEvent e) {
 	        		home.setVisible(false);
-	        		pieceReview();
+	        		pieceReview(user, pass, admin, mod);
 	        	}
 	        });
 	        
@@ -67,7 +67,7 @@ public class UI {
 	        	@Override
 	        	public void actionPerformed(ActionEvent e) {
 	        		home.setVisible(false);
-	        		modUser();
+	        		modUser(user, pass, admin, mod);
 	        	}
 	        });
 		}
@@ -254,11 +254,23 @@ public class UI {
 	
 	}
 	
-	public static void pieceReview() {
+	public static void pieceReview(String user, String pass, String admin, String mod) {
 		JFrame review = new JFrame();
 		review.setSize(1000, 800);
 		review.setLayout(null);
 		review.setVisible(true);
+		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		review.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				review.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
 		
 		
 	}
@@ -374,8 +386,23 @@ public class UI {
 
 	}
 	
-	public static void modUser() {
+	public static void modUser(String user, String pass, String admin, String mod) {
+		JFrame modUser = new JFrame();
+		modUser.setSize(1000, 800);
+		modUser.setLayout(null);
+		modUser.setVisible(true);
 		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		modUser.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				modUser.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
 	}
 	
 	public static void login() throws FileNotFoundException {
