@@ -128,6 +128,18 @@ public class UI {
 		sPage.setLayout(null);
 		sPage.setVisible(true);
 		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		sPage.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sPage.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
+		
 		// Displays the search bar and prompts user for a keyword to search
 		JLabel searchLabel = new JLabel("Search keyword:");
 		searchLabel.setBounds(300, 10, 100, 100);
@@ -163,7 +175,7 @@ public class UI {
 		imageSubmission.setText("Image URL: ");
 		imageSubmission.setBounds(380, 160, 100, 100);
 		JLabel descSubmission = new JLabel();
-		descSubmission.setText("Museum located: ");
+		descSubmission.setText("Description: ");
 		descSubmission.setBounds(380, 190, 100, 100);
 		
 		JTextField name = new JTextField();
