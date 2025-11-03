@@ -420,16 +420,11 @@ public class UI {
 	public static void login() throws FileNotFoundException {
 		// Creates the login screen
 		JFrame loginf = new JFrame("GalleryWalk"); 
-//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
 		loginf.setSize(1000, 800);
         loginf.setLayout(null);
-        loginf.getContentPane().setBackground(Color.decode("#A9CD5A"));
+        loginf.getContentPane().setBackground(Color.decode("#D2B48C"));
         loginf.setVisible(true);
-//        
-//        int height = (int) screenSize.getHeight();
-//        int width = (int) screenSize.getWidth();
+
                 
         // Creates the Login TextFields
         JLabel username = new JLabel("Username: ");
