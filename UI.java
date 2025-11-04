@@ -267,23 +267,9 @@ public class UI {
 	}
 	
 	public static void pieceReview(String user, String pass, String admin, String mod) {
-		JFrame review = new JFrame();
-		review.setSize(1000, 800);
-		review.setLayout(null);
-		review.setVisible(true);
-		
-		JButton home = new JButton("Home");
-		home.setBounds(10, 10, 100, 25);
-		review.add(home);
-		
-		home.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				review.setVisible(false);
-				home(user, pass, admin, mod);
-			}
-		});
-		
+		Gallery review = new Gallery(user, pass, admin, mod, "Datafiles/Submissions.txt");
+		review.reviewDisp();	
+	
 		
 	}
 
