@@ -152,8 +152,14 @@ public class Gallery {
                 String.join(", ", art.tags), art.description
         ));
         
+        JPanel buttons = new JPanel();
         JButton accept = new JButton("Accept");
-        panel.add(accept);
+        accept.setSize(100, 50);  
+        JButton deny = new JButton("Deny");
+        deny.setSize(100, 50);
+        buttons.add(accept);
+        buttons.add(deny);
+        panel.add(buttons, BorderLayout.SOUTH);
         
         panel.add(info, BorderLayout.CENTER);
 
