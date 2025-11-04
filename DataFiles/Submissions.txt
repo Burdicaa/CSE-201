@@ -6,3 +6,10 @@ The Louvre Museum
 1000000000
 portrait, Italian, classic, canvas, painting, oil
 +”Mona Lisa” is an oil painting on white poplar panel by Italian artist Leonardo da Vinci. It is believed that the painting is of the Italian noblewoman Lisa del Giocondo. It is one of the most valuable paintings in the world. It has been housed in The Louvre Museum in Paris since 1797 (besides when it was stolen from 1911-1914).+
+Andy Warhol
+1962
+Campbell’s Soup Cans
+campbells_soup.jpg
+Museum of Modern Art
+acrylic, enamel, canvas, painting, pop art, American
++Warhol first exhibited these thirty-two canvases in 1962, displayed together on shelves like products in a grocery aisle. “I used to drink it,” he said of Campbell’s soup. “I used to have the same lunch every day, for 20 years, I guess, the same thing over and over again.” Though the paintings resemble the mass-produced, printed advertisements that inspired Warhol, they are hand-painted, and the fleur-de-lys pattern ringing each can’s bottom edge is handstamped. Mimicking the repetition and uniformity of advertising by carefully reproducing the same image across each individual canvas, he varied only the label on the front of each can.+
