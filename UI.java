@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
-import java.awt.BorderLayout;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.*;
@@ -19,13 +19,16 @@ public class UI {
 		// Creates the home page
 		JFrame home = new JFrame("GalleryWalk");
 		home.setSize(1000,800);
-		home.setLayout(new BorderLayout());
+		home.setLayout(null);
+        home.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		home.setVisible(true);
 		
 		// Creates a panel for all button in home
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-		home.add(p,BorderLayout.CENTER);
+		p.setBounds(300,50,400,500);
+		p.setBackground(Color.decode("#E9DAC4"));
+		home.add(p, BorderLayout.CENTER);
 
 		JButton search = new JButton("Search");
 		search.setSize(50, 25);
@@ -50,14 +53,33 @@ public class UI {
 			pieceReview.setAlignmentX(Component.CENTER_ALIGNMENT);
 			p.add(pieceReview);
 			
+			JButton modUser = new JButton("Change User to Moderator");
+			modUser.setSize(50, 50);
+			modUser.setAlignmentX(Component.CENTER_ALIGNMENT);
+			p.add(modUser);
+			
 	        pieceReview.addActionListener(new ActionListener() {
 	        	@Override
 	        	public void actionPerformed(ActionEvent e) {
 	        		home.setVisible(false);
-	        		pieceReview();
+	        		Gallery review = new Gallery(user, pass, admin, mod, "DataFiles/Submissions.txt");
+	        		review.reviewDisp();
+	        	}
+	        });
+	        
+	        modUser.addActionListener(new ActionListener() {
+	        	@Override
+	        	public void actionPerformed(ActionEvent e) {
+	        		home.setVisible(false);
+	        		modUser(user, pass, admin, mod);
 	        	}
 	        });
 		}
+		
+		JButton logout = new JButton("Logout");
+		logout.setSize(50,25);
+		logout.setAlignmentX(Component.CENTER_ALIGNMENT);
+		p.add(logout);
 		
 		
 		// Checks for button press and changes screen
@@ -65,7 +87,7 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		searchPage();
+        		searchPage(user, pass, admin, mod);
         	}
         });
 		
@@ -83,25 +105,60 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		Gallery f = new Gallery("Datafiles/AcceptedPieces.txt");
+        		Gallery f = new Gallery(user, pass, admin, mod, "Datafiles/AcceptedPieces.txt");
         		f.disp();
+        	}
+        });
+        
+        logout.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		home.setVisible(false);
+        		try {
+					login();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         	}
         });
         
 	}
 
 
-	public static void searchPage() {
+	public static void searchPage(String user, String pass, String admin, String mod) {
 		JFrame sPage = new JFrame("Search");
 		sPage.setSize(1000, 800);
 		sPage.setLayout(null);
+        sPage.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		sPage.setVisible(true);
+		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		sPage.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sPage.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
+		
+		// Displays the search bar and prompts user for a keyword to search
+		JLabel searchLabel = new JLabel("Search keyword:");
+		searchLabel.setBounds(300, 10, 100, 100);
+		JTextField searchBox = new JTextField();
+        searchBox.setBounds(420, 50, 300, 30);
+        sPage.add(searchLabel);
+        sPage.add(searchBox);
 	}
 	
 	public static void pieceForm(String user, String pass, String admin, String mod) {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
 		form.setLayout(null);
+        form.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		form.setVisible(true);
 		
 		// Allows user to enter text for name of piece
@@ -124,7 +181,7 @@ public class UI {
 		imageSubmission.setText("Image URL: ");
 		imageSubmission.setBounds(380, 160, 100, 100);
 		JLabel descSubmission = new JLabel();
-		descSubmission.setText("Museum located: ");
+		descSubmission.setText("Description: ");
 		descSubmission.setBounds(380, 190, 100, 100);
 		
 		JTextField name = new JTextField();
@@ -191,7 +248,7 @@ public class UI {
 					submission.write(creator.getText() + "\n");
 					submission.write(year.getText() + "\n");
 					submission.write(name.getText() + "\n");
-					submission.write("Pictures/" + image.getText() + "\n");
+					submission.write(image.getText() + "\n");
 					submission.write(museum.getText() + "\n");
 					submission.write(worth.getText() + "\n");
 					submission.write(desc.getText() + "\n");
@@ -215,18 +272,32 @@ public class UI {
 	
 	}
 	
-	public static void pieceReview() {
-		JFrame review = new JFrame();
-		review.setSize(1000, 800);
-		review.setLayout(null);
-		review.setVisible(true);
-	}
+//	public static void pieceReview(String user, String pass, String admin, String mod) {
+//		JFrame review = new JFrame();
+//		review.setSize(1000, 800);
+//		review.setLayout(null);
+//        review.getContentPane().setBackground(Color.decode("#E9DAC4"));
+//		review.setVisible(true);
+//		
+//		JButton home = new JButton("Home");
+//		home.setBounds(10, 10, 100, 25);
+//		review.add(home);
+//		
+//		home.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				review.setVisible(false);
+//				home(user, pass, admin, mod);
+//			}
+//		});
+//		
+//	}
 
 	public static void createUser() {
 		JFrame createU = new JFrame("Create User");
 	    createU.setSize(1000, 800);
 	    createU.setLayout(null);
-	    createU.getContentPane().setBackground(Color.decode("#D5F5E3"));
+        createU.getContentPane().setBackground(Color.decode("#E9DAC4"));
 	    createU.setVisible(true);
 
 	    // Title
@@ -333,29 +404,55 @@ public class UI {
 
 	}
 	
+	public static void modUser(String user, String pass, String admin, String mod) {
+		JFrame modUser = new JFrame();
+		modUser.setSize(1000, 800);
+		modUser.setLayout(null);
+        modUser.getContentPane().setBackground(Color.decode("#E9DAC4"));
+		modUser.setVisible(true);
+		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		modUser.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				modUser.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
+	}
+	
 	public static void login() throws FileNotFoundException {
 		// Creates the login screen
 		JFrame loginf = new JFrame("GalleryWalk"); 
-//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		f.setSize((int) screenSize.getHeight(), (int) screenSize.getWidth());
 		loginf.setSize(1000, 800);
         loginf.setLayout(null);
-        loginf.getContentPane().setBackground(Color.decode("#A9CD5A"));
+        loginf.getContentPane().setBackground(Color.decode("#E9DAC4"));
         loginf.setVisible(true);
-//        
-//        int height = (int) screenSize.getHeight();
-//        int width = (int) screenSize.getWidth();
-                
+        
+        ImageIcon headerIcon = new ImageIcon("Pictures/Screenshot 2025-11-03 235341.png");
+
+        // Scale image to fit the top of the window
+        Image scaledHeader = headerIcon.getImage().getScaledInstance(500, 200, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(scaledHeader));
+        headerLabel.setBounds(250, 50, 500, 200); // X, Y, Width, Height
+        loginf.add(headerLabel);
+        
         // Creates the Login TextFields
         JLabel username = new JLabel("Username: ");
-        username.setBounds(380, 10, 100, 100);
+        username.setBounds(360, 210, 100, 100);
+        username.setFont(new Font("Arial", Font.BOLD, 16));
+        username.setForeground(Color.decode("#4C474A"));
         JLabel password = new JLabel("Password: ");
-        password.setBounds(380, 40, 100, 100);
+        password.setBounds(360, 255, 100, 100);
+        password.setFont(new Font("Arial", Font.BOLD, 16));
+        password.setForeground(Color.decode("#4C474A"));
         JTextField usernameBox = new JTextField();
-        usernameBox.setBounds(450, 40, 160, 30);
-        JTextField passwordBox = new JTextField();
-        passwordBox.setBounds(450, 70, 160, 30);
+        usernameBox.setBounds(450, 245, 200, 30);
+        JPasswordField passwordBox = new JPasswordField();
+        passwordBox.setBounds(450, 290, 200, 30);
         loginf.add(username);
         loginf.add(usernameBox);
         loginf.add(password);
@@ -363,15 +460,19 @@ public class UI {
         
         // Create login submission button
         JButton login = new JButton("Login");
-        login.setBounds(440, 110, 100, 25);
+        login.setBounds(455, 340, 100, 30);
+        login.setFont(new Font("Arial", Font.BOLD, 16));
+        login.setForeground(Color.decode("#4C474A"));
         loginf.add(login);
         
         // Create User button
         JButton createU = new JButton("Create User");
-        createU.setBounds(415, 140, 150, 25);
+        createU.setBounds(430, 400, 150, 25);
         createU.setOpaque(false);
         createU.setContentAreaFilled(false);
         createU.setBorderPainted(false);
+        createU.setFont(new Font("Arial", Font.BOLD, 16));
+        createU.setForeground(Color.decode("#4C474A"));
         loginf.add(createU);
         
         
@@ -380,7 +481,9 @@ public class UI {
         skipLogin.setOpaque(false);
         skipLogin.setContentAreaFilled(false);
         skipLogin.setBorderPainted(false);
-        skipLogin.setBounds(440, 170, 100, 25);
+        skipLogin.setBounds(430, 450, 150, 25);
+        skipLogin.setFont(new Font("Arial", Font.BOLD, 16));
+        skipLogin.setForeground(Color.decode("#4C474A"));
         loginf.add(skipLogin);
         loginf.repaint();
         
@@ -390,6 +493,7 @@ public class UI {
         failedLogin.setForeground(Color.RED);
         failedLogin.setVisible(false);
         loginf.add(failedLogin);
+                
         
         // Add an if statement encompassing this to check if account is real
         login.addActionListener(new ActionListener() {
@@ -439,6 +543,8 @@ public class UI {
         }
 
 }
+
+
 
 
 

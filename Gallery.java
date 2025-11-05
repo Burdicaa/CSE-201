@@ -1,13 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 
 public class Gallery {
 	
     public ArrayList<ArtPiece> pieces;
+    public String usr;
+    public String pass;
+    public String admin;
+    public String mod;
 
-    public Gallery(String fileName) {
+    public Gallery(String usr, String pass, String admin, String mod, String fileName) {
+    	this.usr = usr;
+    	this.pass = pass;
+    	this.admin = admin;
+    	this.mod = mod;
         this.pieces = loadPieces(fileName);
     }
 
@@ -18,6 +28,18 @@ public class Gallery {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.decode("#E9DAC4"));
+    
+        JButton home = new JButton("Home");
+        mainPanel.add(home);
+        
+        home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				UI.home(usr, pass, admin, mod);
+			}
+		});
 
         for (ArtPiece art : pieces) {
             mainPanel.add(createArtPanel(art));
@@ -29,6 +51,37 @@ public class Gallery {
         frame.setVisible(true);
     }
 
+    // Used to create the listing for PieceReview page
+    public void reviewDisp() {
+        JFrame frame = new JFrame("Art Gallery Viewer");
+        frame.setSize(1000, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.decode("#E9DAC4"));
+        
+        JButton home = new JButton("Home");
+        mainPanel.add(home);
+        
+        home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				UI.home(usr, pass, admin, mod);
+			}
+		});
+
+        for (ArtPiece art : pieces) {
+            mainPanel.add(createReviewPanel(art));
+            mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        }
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        frame.add(scrollPane);
+        frame.setVisible(true);
+    }
+    
     public ArrayList<String> dispKey() {
         ArrayList<String> keywords = new ArrayList<>();
         for (ArtPiece art : pieces) {
@@ -66,6 +119,52 @@ public class Gallery {
                 (art.value > 0 ? "$" + String.format("%,d", art.value) : "Unknown"),
                 String.join(", ", art.tags), art.description
         ));
+        
+        JButton comments = new JButton("Comments");
+        panel.add(comments, BorderLayout.SOUTH);
+        
+        panel.add(info, BorderLayout.CENTER);
+
+        return panel;
+    }
+    
+    // Helps the reviewDisp
+    private JPanel createReviewPanel(ArtPiece art) {
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+        panel.setLayout(new BorderLayout(10, 10));
+        panel.setMaximumSize(new Dimension(750, 300));
+
+        JLabel imageLabel;
+        try {
+            ImageIcon icon = new ImageIcon("Pictures/" + art.imageFileName);
+            Image scaled = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            imageLabel = new JLabel(new ImageIcon(scaled));
+        } catch (Exception e) {
+            imageLabel = new JLabel("Image not found");
+        }
+        panel.add(imageLabel, BorderLayout.WEST);
+
+        JTextArea info = new JTextArea();
+        info.setEditable(false);
+        info.setLineWrap(true);
+        info.setWrapStyleWord(true);
+        info.setText(String.format(
+                "%s (%d)\nTitle: %s\nMuseum: %s\nValue: %s\nTags: %s\n\n%s",
+                art.artist, art.year, art.title, art.museum,
+                (art.value > 0 ? "$" + String.format("%,d", art.value) : "Unknown"),
+                String.join(", ", art.tags), art.description
+        ));
+        
+        JPanel buttons = new JPanel();
+        JButton accept = new JButton("Accept");
+        accept.setSize(100, 50);  
+        JButton deny = new JButton("Deny");
+        deny.setSize(100, 50);
+        buttons.add(accept);
+        buttons.add(deny);
+        panel.add(buttons, BorderLayout.SOUTH);
+        
         panel.add(info, BorderLayout.CENTER);
 
         return panel;

@@ -1,14 +1,8 @@
-Vincent van Gogh
-1889
-The Starry Night
-Pictures/starrynight.jpg
-Museum of Modern Art
-100000000
-+”The Starry Night” is an oil-on-canvas painting by Dutch painter Vincent van Gogh. It is inspired by his view in the Saint-Paul-de-Mausole asylum. It is subject to many interpretations ranging from religion to emotional turmoil. It has been housed in the Museum of Modern Art (MoMA) in New York City since 1941.+
-
-
-
-Pictures/
-
-
-
+Leonardo da Vinci
+1517
+Mona Lisa
+monalisa.jpg
+The Louvre Museum
+1000000000
+portrait, Italian, classic, canvas, painting, oil
++”Mona Lisa” is an oil painting on white poplar panel by Italian artist Leonardo da Vinci. It is believed that the painting is of the Italian noblewoman Lisa del Giocondo. It is one of the most valuable paintings in the world. It has been housed in The Louvre Museum in Paris since 1797 (besides when it was stolen from 1911-1914).+
