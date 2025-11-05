@@ -36,10 +36,22 @@ public class UI {
 		p.add(search);
 		
 		// Creates a button that allows user to change to piece submission form
-		JButton submitPiece = new JButton("Create Piece Submission Form");
-		submitPiece.setSize(50, 50);
-		submitPiece.setAlignmentX(Component.CENTER_ALIGNMENT);
-		p.add(submitPiece);
+		if (user != null && pass != null) {
+			JButton submitPiece = new JButton("Create Piece Submission Form");
+			submitPiece.setSize(50, 50);
+			submitPiece.setAlignmentX(Component.CENTER_ALIGNMENT);
+			p.add(submitPiece);
+		
+			// Checks for button press and changes screen
+        	submitPiece.addActionListener(new ActionListener() {
+        		@Override
+        		public void actionPerformed(ActionEvent e) {
+        			home.setVisible(false);
+        			pieceForm(user, pass, admin, mod);
+        		}
+        	});
+		
+		}
 		
 		JButton gallery = new JButton("Gallery");
 		gallery.setSize(50,50);
@@ -91,15 +103,6 @@ public class UI {
         	}
         });
 		
-		
-		// Checks for button press and changes screen
-        submitPiece.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		home.setVisible(false);
-        		pieceForm(user, pass, admin, mod);
-        	}
-        });
 
         gallery.addActionListener(new ActionListener() {
         	@Override
@@ -177,12 +180,15 @@ public class UI {
 		JLabel museumSubmission = new JLabel();
 		museumSubmission.setText("Museum located: ");
 		museumSubmission.setBounds(380, 130, 100, 100);
+		JLabel attributesSub = new JLabel();
+		attributesSub.setText("Attributes: ");
+		attributesSub.setBounds(380,160,100,100);
 		JLabel imageSubmission = new JLabel();
 		imageSubmission.setText("Image URL: ");
-		imageSubmission.setBounds(380, 160, 100, 100);
+		imageSubmission.setBounds(380, 190, 100, 100);
 		JLabel descSubmission = new JLabel();
 		descSubmission.setText("Description: ");
-		descSubmission.setBounds(380, 190, 100, 100);
+		descSubmission.setBounds(380, 220, 100, 100);
 		
 		JTextField name = new JTextField();
 		name.setBounds(480, 40, 130, 30);
@@ -194,13 +200,15 @@ public class UI {
 		worth.setBounds(480, 130, 130, 30);
 		JTextField museum = new JTextField();
 		museum.setBounds(480, 160, 130, 30);
+		JTextField attributes = new JTextField();
+		attributes.setBounds(480,190,130,30);
 		JTextField image = new JTextField();
-		image.setBounds(480, 190, 130, 30);
+		image.setBounds(480, 220, 130, 30);
 		JTextArea desc = new JTextArea(5, 25);
 		desc.setLineWrap(true);
 		desc.setWrapStyleWord(true);
 		JScrollPane descScroll = new JScrollPane(desc);
-		descScroll.setBounds(380, 250, 230, 100);
+		descScroll.setBounds(380, 280, 230, 100);
 
 		// Adds the text to the form
 		form.add(nameSubmission);	
@@ -208,6 +216,7 @@ public class UI {
 		form.add(yearSubmission);
 		form.add(worthSubmission);
 		form.add(museumSubmission);
+		form.add(attributesSub);
 		form.add(imageSubmission);
 		form.add(descSubmission);
 		form.add(name);
@@ -215,6 +224,7 @@ public class UI {
 		form.add(year);
 		form.add(worth);
 		form.add(museum);
+		form.add(attributes);
 		form.add(image);
 		form.add(descScroll);
 		
@@ -251,6 +261,7 @@ public class UI {
 					submission.write(image.getText() + "\n");
 					submission.write(museum.getText() + "\n");
 					submission.write(worth.getText() + "\n");
+					submission.write(attributes.getText() + "\n");
 					submission.write(desc.getText() + "\n");
 					submission.close();
 					file.close();
