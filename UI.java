@@ -425,7 +425,7 @@ public class UI {
         loginf.getContentPane().setBackground(Color.decode("#E9DAC4"));
         loginf.setVisible(true);
         
-        ImageIcon headerIcon = new ImageIcon("C:\\Users\\hadix\\git\\CSE-201\\Pictures\\Screenshot 2025-11-03 235341.png");
+        ImageIcon headerIcon = new ImageIcon("Pictures/Screenshot 2025-11-03 235341.png");
 
         // Scale image to fit the top of the window
         Image scaledHeader = headerIcon.getImage().getScaledInstance(500, 200, Image.SCALE_SMOOTH);
@@ -536,6 +536,7 @@ public class UI {
         }
 
 }
+
 
 
 
