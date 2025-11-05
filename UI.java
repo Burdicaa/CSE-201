@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
-import java.awt.BorderLayout;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.*;
@@ -267,9 +267,23 @@ public class UI {
 	}
 	
 	public static void pieceReview(String user, String pass, String admin, String mod) {
-		Gallery review = new Gallery(user, pass, admin, mod, "Datafiles/Submissions.txt");
-		review.reviewDisp();	
-	
+		JFrame review = new JFrame();
+		review.setSize(1000, 800);
+		review.setLayout(null);
+		review.setVisible(true);
+		
+		JButton home = new JButton("Home");
+		home.setBounds(10, 10, 100, 25);
+		review.add(home);
+		
+		home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				review.setVisible(false);
+				home(user, pass, admin, mod);
+			}
+		});
+		
 		
 	}
 
@@ -408,19 +422,30 @@ public class UI {
 		JFrame loginf = new JFrame("GalleryWalk"); 
 		loginf.setSize(1000, 800);
         loginf.setLayout(null);
-        loginf.getContentPane().setBackground(Color.decode("#D2B48C"));
+        loginf.getContentPane().setBackground(Color.decode("#E9DAC4"));
         loginf.setVisible(true);
+        
+        ImageIcon headerIcon = new ImageIcon("C:\\Users\\hadix\\git\\CSE-201\\Pictures\\Screenshot 2025-11-03 235341.png");
 
-                
+        // Scale image to fit the top of the window
+        Image scaledHeader = headerIcon.getImage().getScaledInstance(500, 200, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(scaledHeader));
+        headerLabel.setBounds(250, 50, 500, 200); // X, Y, Width, Height
+        loginf.add(headerLabel);
+        
         // Creates the Login TextFields
         JLabel username = new JLabel("Username: ");
-        username.setBounds(380, 10, 100, 100);
+        username.setBounds(360, 210, 100, 100);
+        username.setFont(new Font("Arial", Font.BOLD, 16));
+        username.setForeground(Color.decode("#4C474A"));
         JLabel password = new JLabel("Password: ");
-        password.setBounds(380, 40, 100, 100);
+        password.setBounds(360, 255, 100, 100);
+        password.setFont(new Font("Arial", Font.BOLD, 16));
+        password.setForeground(Color.decode("#4C474A"));
         JTextField usernameBox = new JTextField();
-        usernameBox.setBounds(450, 40, 160, 30);
+        usernameBox.setBounds(450, 245, 200, 30);
         JPasswordField passwordBox = new JPasswordField();
-        passwordBox.setBounds(450, 70, 160, 30);
+        passwordBox.setBounds(450, 290, 200, 30);
         loginf.add(username);
         loginf.add(usernameBox);
         loginf.add(password);
@@ -428,15 +453,19 @@ public class UI {
         
         // Create login submission button
         JButton login = new JButton("Login");
-        login.setBounds(440, 110, 100, 25);
+        login.setBounds(455, 340, 100, 30);
+        login.setFont(new Font("Arial", Font.BOLD, 16));
+        login.setForeground(Color.decode("#4C474A"));
         loginf.add(login);
         
         // Create User button
         JButton createU = new JButton("Create User");
-        createU.setBounds(415, 140, 150, 25);
+        createU.setBounds(430, 400, 150, 25);
         createU.setOpaque(false);
         createU.setContentAreaFilled(false);
         createU.setBorderPainted(false);
+        createU.setFont(new Font("Arial", Font.BOLD, 16));
+        createU.setForeground(Color.decode("#4C474A"));
         loginf.add(createU);
         
         
@@ -445,7 +474,9 @@ public class UI {
         skipLogin.setOpaque(false);
         skipLogin.setContentAreaFilled(false);
         skipLogin.setBorderPainted(false);
-        skipLogin.setBounds(440, 170, 100, 25);
+        skipLogin.setBounds(430, 450, 150, 25);
+        skipLogin.setFont(new Font("Arial", Font.BOLD, 16));
+        skipLogin.setForeground(Color.decode("#4C474A"));
         loginf.add(skipLogin);
         loginf.repaint();
         
@@ -455,6 +486,7 @@ public class UI {
         failedLogin.setForeground(Color.RED);
         failedLogin.setVisible(false);
         loginf.add(failedLogin);
+                
         
         // Add an if statement encompassing this to check if account is real
         login.addActionListener(new ActionListener() {
