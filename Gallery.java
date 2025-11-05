@@ -31,7 +31,6 @@ public class Gallery {
         mainPanel.setBackground(Color.decode("#E9DAC4"));
     
         JButton home = new JButton("Home");
-        home.setSize(50,25);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
@@ -63,7 +62,6 @@ public class Gallery {
         mainPanel.setBackground(Color.decode("#E9DAC4"));
         
         JButton home = new JButton("Home");
-        home.setSize(50,25);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
