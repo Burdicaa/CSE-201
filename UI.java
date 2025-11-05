@@ -19,12 +19,15 @@ public class UI {
 		// Creates the home page
 		JFrame home = new JFrame("GalleryWalk");
 		home.setSize(1000,800);
-		home.setLayout(new BorderLayout());
+		home.setLayout(null);
+        home.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		home.setVisible(true);
 		
 		// Creates a panel for all button in home
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		p.setBounds(300,50,400,500);
+		p.setBackground(Color.decode("#E9DAC4"));
 		home.add(p, BorderLayout.CENTER);
 
 		JButton search = new JButton("Search");
@@ -126,6 +129,7 @@ public class UI {
 		JFrame sPage = new JFrame("Search");
 		sPage.setSize(1000, 800);
 		sPage.setLayout(null);
+        sPage.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		sPage.setVisible(true);
 		
 		JButton home = new JButton("Home");
@@ -153,6 +157,7 @@ public class UI {
 		JFrame form = new JFrame("Piece Submission");
 		form.setSize(1000, 800);
 		form.setLayout(null);
+        form.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		form.setVisible(true);
 		
 		// Allows user to enter text for name of piece
@@ -270,6 +275,7 @@ public class UI {
 		JFrame review = new JFrame();
 		review.setSize(1000, 800);
 		review.setLayout(null);
+        review.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		review.setVisible(true);
 		
 		JButton home = new JButton("Home");
@@ -291,7 +297,7 @@ public class UI {
 		JFrame createU = new JFrame("Create User");
 	    createU.setSize(1000, 800);
 	    createU.setLayout(null);
-	    createU.getContentPane().setBackground(Color.decode("#D5F5E3"));
+        createU.getContentPane().setBackground(Color.decode("#E9DAC4"));
 	    createU.setVisible(true);
 
 	    // Title
@@ -402,6 +408,7 @@ public class UI {
 		JFrame modUser = new JFrame();
 		modUser.setSize(1000, 800);
 		modUser.setLayout(null);
+        modUser.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		modUser.setVisible(true);
 		
 		JButton home = new JButton("Home");

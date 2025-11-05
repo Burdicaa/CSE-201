@@ -28,7 +28,8 @@ public class Gallery {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        
+        mainPanel.setBackground(Color.decode("#E9DAC4"));
+    
         JButton home = new JButton("Home");
         home.setSize(50,25);
         mainPanel.add(home);
@@ -59,6 +60,7 @@ public class Gallery {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.decode("#E9DAC4"));
         
         JButton home = new JButton("Home");
         home.setSize(50,25);
