@@ -47,6 +47,11 @@ public class Gallery {
         }
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
+        // Sets it so the scrollpane starts at the top rather than at position of
+        // last added piece
+        SwingUtilities.invokeLater(() ->
+        scrollPane.getVerticalScrollBar().setValue(0));
+        
         frame.add(scrollPane);
         frame.setVisible(true);
     }
@@ -78,6 +83,11 @@ public class Gallery {
         }
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
+        // Sets it so the scrollpane starts at the top rather than at position of
+        // last added piece
+        SwingUtilities.invokeLater(() ->
+        scrollPane.getVerticalScrollBar().setValue(0));
+        
         frame.add(scrollPane);
         frame.setVisible(true);
     }
