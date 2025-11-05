@@ -119,6 +119,10 @@ public class Gallery {
                 (art.value > 0 ? "$" + String.format("%,d", art.value) : "Unknown"),
                 String.join(", ", art.tags), art.description
         ));
+        
+        JButton comments = new JButton("Comments");
+        panel.add(comments, BorderLayout.SOUTH);
+        
         panel.add(info, BorderLayout.CENTER);
 
         return panel;
