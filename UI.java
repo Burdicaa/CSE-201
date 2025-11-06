@@ -230,12 +230,12 @@ public class UI {
 		
 		// Submit button to properly add all data into a holding file for confirmation
 		JButton submit = new JButton("Submit");
-		submit.setBounds(440, 350, 100, 25);
+		submit.setBounds(440, 380, 100, 25);
 		form.add(submit);
 		
 		// Submission Successful Indicator Text
 		JLabel submitSuccess = new JLabel("Form Successfully Submitted");
-		submitSuccess.setBounds(410, 380, 230, 20);
+		submitSuccess.setBounds(410, 410, 230, 20);
 		submitSuccess.setForeground(Color.BLUE);
 		submitSuccess.setOpaque(true);
 		form.add(submitSuccess);
@@ -262,7 +262,7 @@ public class UI {
 					submission.write(museum.getText() + "\n");
 					submission.write(worth.getText() + "\n");
 					submission.write(attributes.getText() + "\n");
-					submission.write(desc.getText() + "\n");
+					submission.write("+" + desc.getText() + "+\n");
 					submission.close();
 					file.close();
 				} catch (IOException q) {
