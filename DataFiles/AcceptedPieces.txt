@@ -30,11 +30,3 @@ Galleria dell’Accademia
 300000000
 statue, classic, Italian, religious, marble
 +”David” is a marble statue carved by Italian artist Michelangelo which depicts the biblical figure David. It was commissioned for the construction of the Florence Cathedral, along with 11 other prophets. It was situated at the roofline of the cathedral, where it was then moved to the public square in front of the Palazzo della Signoria and finally moved to the Galleria dell’Accademia where it has remained since 1873. A replica of the statue is in its original spot in the public square.+
-Leonardo da Vinci
-1517
-Mona Lisa
-monalisa.jpg
-The Louvre Museum
-1000000000
-portrait, Italian, classic, canvas, painting, oil
-+”Mona Lisa” is an oil painting on white poplar panel by Italian artist Leonardo da Vinci. It is believed that the painting is of the Italian noblewoman Lisa del Giocondo. It is one of the most valuable paintings in the world. It has been housed in The Louvre Museum in Paris since 1797 (besides when it was stolen from 1911-1914).+

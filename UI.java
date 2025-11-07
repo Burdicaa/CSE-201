@@ -480,7 +480,7 @@ public class UI {
         
         // Fail to login Text
         JLabel failedLogin = new JLabel("Failed to Log in, Try Again");
-        failedLogin.setBounds(420, 160, 200, 100);
+        failedLogin.setBounds(428, 330, 200, 100);
         failedLogin.setForeground(Color.RED);
         failedLogin.setVisible(false);
         loginf.add(failedLogin);

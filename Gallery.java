@@ -16,12 +16,14 @@ public class Gallery {
     public String pass;
     public String admin;
     public String mod;
+    public String fileName;
 
     public Gallery(String usr, String pass, String admin, String mod, String fileName) {
     	this.usr = usr;
     	this.pass = pass;
     	this.admin = admin;
     	this.mod = mod;
+    	this.fileName = fileName;
         this.pieces = loadPieces(fileName);
     }
 
@@ -35,6 +37,7 @@ public class Gallery {
         mainPanel.setBackground(Color.decode("#E9DAC4"));
     
         JButton home = new JButton("Home");
+        home.setAlignmentX(JButton.CENTER_ALIGNMENT);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
@@ -64,13 +67,16 @@ public class Gallery {
     public void reviewDisp() {
         JFrame frame = new JFrame("Art Gallery Viewer");
         frame.setSize(1000, 800);
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        
         mainPanel.setBackground(Color.decode("#E9DAC4"));
         
         JButton home = new JButton("Home");
+        home.setAlignmentX(JButton.CENTER_ALIGNMENT);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
@@ -137,6 +143,14 @@ public class Gallery {
         JButton comments = new JButton("Comments");
         panel.add(comments, BorderLayout.SOUTH);
         
+        comments.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		Comments c = new Comments(usr, pass, admin, mod, fileName);
+        		
+        	}
+        });
+        
         panel.add(info, BorderLayout.CENTER);
 
         return panel;
@@ -198,7 +212,34 @@ public class Gallery {
 					Accepted.close();
 					Acceptedfile.close();
         			
-        			// Modifies the Submisseions file to no longer contain that piece
+        			// Modifies the Submissions file to no longer contain that piece
+					List<String> lines = Files.readAllLines(Paths.get("DataFiles/Submissions.txt"));
+					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", false);
+					for (int i = 0; i < lines.size();i++) {
+						if (lines.get(i).equals(art.artist) || lines.get(i).equals("" + art.year) || lines.get(i).equals(art.title) || lines.get(i).equals(art.museum) || lines.get(i).equals("" + art.value) ||
+								lines.get(i).equals(String.join(", ", art.tags)) || lines.get(i).equals("+" + art.description + "+") || lines.get(i).equals(art.imageFileName)) {
+							continue;							
+						}
+						else {
+							submission.write(lines.get(i) + "\n");
+						}
+					}
+					submission.close();
+					panel.setVisible(false);
+					panel.repaint();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
+        
+        deny.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+        			
+        			// Modifies the Submissions file to no longer contain that piece
 					List<String> lines = Files.readAllLines(Paths.get("DataFiles/Submissions.txt"));
 					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", false);
 					for (int i = 0; i < lines.size();i++) {
