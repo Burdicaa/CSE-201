@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
 
 public class Gallery {
 	
@@ -12,12 +16,14 @@ public class Gallery {
     public String pass;
     public String admin;
     public String mod;
+    public String fileName;
 
     public Gallery(String usr, String pass, String admin, String mod, String fileName) {
     	this.usr = usr;
     	this.pass = pass;
     	this.admin = admin;
     	this.mod = mod;
+    	this.fileName = fileName;
         this.pieces = loadPieces(fileName);
     }
 
@@ -31,6 +37,7 @@ public class Gallery {
         mainPanel.setBackground(Color.decode("#E9DAC4"));
     
         JButton home = new JButton("Home");
+        home.setAlignmentX(JButton.CENTER_ALIGNMENT);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
@@ -47,6 +54,11 @@ public class Gallery {
         }
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
+        // Sets it so the scrollpane starts at the top rather than at position of
+        // last added piece
+        SwingUtilities.invokeLater(() ->
+        scrollPane.getVerticalScrollBar().setValue(0));
+
         frame.add(scrollPane);
         frame.setVisible(true);
     }
@@ -55,13 +67,16 @@ public class Gallery {
     public void reviewDisp() {
         JFrame frame = new JFrame("Art Gallery Viewer");
         frame.setSize(1000, 800);
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        
         mainPanel.setBackground(Color.decode("#E9DAC4"));
         
         JButton home = new JButton("Home");
+        home.setAlignmentX(JButton.CENTER_ALIGNMENT);
         mainPanel.add(home);
         
         home.addActionListener(new ActionListener() {
@@ -78,6 +93,11 @@ public class Gallery {
         }
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
+        // Sets it so the scrollpane starts at the top rather than at position of
+        // last added piece
+        SwingUtilities.invokeLater(() ->
+        scrollPane.getVerticalScrollBar().setValue(0));
+        
         frame.add(scrollPane);
         frame.setVisible(true);
     }
@@ -123,6 +143,14 @@ public class Gallery {
         JButton comments = new JButton("Comments");
         panel.add(comments, BorderLayout.SOUTH);
         
+        comments.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		Comments c = new Comments(usr, pass, admin, mod, fileName);
+        		
+        	}
+        });
+        
         panel.add(info, BorderLayout.CENTER);
 
         return panel;
@@ -164,6 +192,74 @@ public class Gallery {
         buttons.add(accept);
         buttons.add(deny);
         panel.add(buttons, BorderLayout.SOUTH);
+        
+        accept.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+        			// moves items to AcceptedPieces.txt
+					FileWriter Accepted = new FileWriter("DataFiles/AcceptedPieces.txt", true);
+					RandomAccessFile Acceptedfile = new RandomAccessFile("DataFiles/AcceptedPieces.txt", "rw");
+					Acceptedfile.seek(Acceptedfile.length());
+					Accepted.write(art.artist + "\n");
+					Accepted.write(art.year + "\n");
+					Accepted.write(art.title + "\n");
+					Accepted.write(art.imageFileName + "\n");
+					Accepted.write(art.museum + "\n");
+					Accepted.write(art.value + "\n");
+					Accepted.write(String.join(", ", art.tags) + "\n");
+					Accepted.write("+" + art.description + "+" + "\n");
+					Accepted.close();
+					Acceptedfile.close();
+        			
+        			// Modifies the Submissions file to no longer contain that piece
+					List<String> lines = Files.readAllLines(Paths.get("DataFiles/Submissions.txt"));
+					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", false);
+					for (int i = 0; i < lines.size();i++) {
+						if (lines.get(i).equals(art.artist) || lines.get(i).equals("" + art.year) || lines.get(i).equals(art.title) || lines.get(i).equals(art.museum) || lines.get(i).equals("" + art.value) ||
+								lines.get(i).equals(String.join(", ", art.tags)) || lines.get(i).equals("+" + art.description + "+") || lines.get(i).equals(art.imageFileName)) {
+							continue;							
+						}
+						else {
+							submission.write(lines.get(i) + "\n");
+						}
+					}
+					submission.close();
+					panel.setVisible(false);
+					panel.repaint();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
+        
+        deny.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+        			
+        			// Modifies the Submissions file to no longer contain that piece
+					List<String> lines = Files.readAllLines(Paths.get("DataFiles/Submissions.txt"));
+					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", false);
+					for (int i = 0; i < lines.size();i++) {
+						if (lines.get(i).equals(art.artist) || lines.get(i).equals("" + art.year) || lines.get(i).equals(art.title) || lines.get(i).equals(art.museum) || lines.get(i).equals("" + art.value) ||
+								lines.get(i).equals(String.join(", ", art.tags)) || lines.get(i).equals("+" + art.description + "+") || lines.get(i).equals(art.imageFileName)) {
+							continue;							
+						}
+						else {
+							submission.write(lines.get(i) + "\n");
+						}
+					}
+					submission.close();
+					panel.setVisible(false);
+					panel.repaint();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        });
         
         panel.add(info, BorderLayout.CENTER);
 
@@ -265,6 +361,8 @@ public class Gallery {
 
         return list;
     }
+    
+
     
     
     private class ArtPiece {
