@@ -14,3 +14,7 @@ user4
 password
 Admin: false
 Mod: false
+1
+1
+Admin: true
+Mod: true

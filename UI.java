@@ -366,6 +366,26 @@ public class UI {
 	                return;
 	            }
 
+	         // Password validation rules
+	            if (password.length() < 5 || password.length() > 25) {
+	                messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Password must be 5–25 characters long.");
+	                return;
+	            }
+
+	            // Allow English letters, digits, and any standard keyboard special symbols
+	            if (!password.matches("[A-Za-z0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?`~]+")) {
+	                messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Password may only include English letters, digits, or keyboard symbols.");
+	                return;
+	            }
+
+	            // Block non-English characters
+	            if (!password.matches("\\A\\p{ASCII}+\\z")) {
+	                messageLabel.setForeground(Color.RED);
+	                messageLabel.setText("Password may only include English letters, digits, or keyboard symbols.");
+	                return;
+	            }
 	          
 	            // Save to Accounts.txt
 	            try {
@@ -405,23 +425,143 @@ public class UI {
 	}
 	
 	public static void modUser(String user, String pass, String admin, String mod) {
-		JFrame modUser = new JFrame();
-		modUser.setSize(1000, 800);
-		modUser.setLayout(null);
-        modUser.getContentPane().setBackground(Color.decode("#E9DAC4"));
-		modUser.setVisible(true);
-		
-		JButton home = new JButton("Home");
-		home.setBounds(10, 10, 100, 25);
-		modUser.add(home);
-		
-		home.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				modUser.setVisible(false);
-				home(user, pass, admin, mod);
-			}
-		});
+		JFrame modFrame = new JFrame("Administrator Change");
+	    modFrame.setSize(1000, 800);
+	    modFrame.setLayout(null);
+	    modFrame.getContentPane().setBackground(Color.decode("#E9DAC4"));
+	    modFrame.setVisible(true);
+
+	    JLabel title = new JLabel("Administrator & Moderator Settings");
+	    title.setBounds(330, 30, 400, 30);
+	    title.setFont(new Font("Arial", Font.BOLD, 18));
+	    title.setForeground(Color.decode("#4C474A"));
+	    modFrame.add(title);
+
+	    // Panel for chart
+	    JPanel mainPanel = new JPanel();
+	    mainPanel.setLayout(new GridLayout(0, 4, 5, 5));  // Delete if we don't want admin to change Change 4 to 3 
+	    mainPanel.setBackground(Color.decode("#E9DAC4"));
+
+	    JScrollPane scrollPane = new JScrollPane(mainPanel);
+	    scrollPane.setBounds(100, 100, 800, 500);
+	    scrollPane.setBorder(BorderFactory.createLineBorder(Color.decode("#4C474A")));
+	    modFrame.add(scrollPane);
+
+	    // Add header row
+	    mainPanel.add(new JLabel("Username", SwingConstants.CENTER));
+	    mainPanel.add(new JLabel("Password", SwingConstants.CENTER));
+	    mainPanel.add(new JLabel("Admin", SwingConstants.CENTER));
+	    mainPanel.add(new JLabel("Moderator", SwingConstants.CENTER));
+
+	    java.util.List<String[]> users = new java.util.ArrayList<>();
+
+	    // Read accounts from file
+	    try {
+	        Scanner sc = new Scanner(new File("DataFiles/Accounts.txt"));
+	        while (sc.hasNextLine()) {
+	            String u = sc.nextLine();
+	            if (!sc.hasNextLine()) break;
+	            String p = sc.nextLine();
+	            if (!sc.hasNextLine()) break;
+	            String a = sc.nextLine();
+	            if (!sc.hasNextLine()) break;
+	            String m = sc.nextLine();
+	            users.add(new String[]{u, p, a, m});
+	        }
+	        sc.close();
+	    } catch (Exception e) {
+	        JOptionPane.showMessageDialog(modFrame, "Error reading Accounts.txt");
+	        e.printStackTrace();
+	    }
+
+	    // Build rows dynamically
+	    for (int i = 0; i < users.size(); i++) {
+	        String[] info = users.get(i);
+	        JLabel uLabel = new JLabel(info[0], SwingConstants.CENTER);
+	        JLabel pLabel = new JLabel(info[1], SwingConstants.CENTER);
+
+	        JButton adminBtn = new JButton(info[2].split(": ")[1]);
+	        JButton modBtn = new JButton(info[3].split(": ")[1]);
+
+	        adminBtn.setOpaque(true);
+	        modBtn.setOpaque(true);
+	        adminBtn.setBackground(adminBtn.getText().equals("true") ? new Color(0, 200, 0) : new Color(200, 0, 0));
+	        modBtn.setBackground(modBtn.getText().equals("true") ? new Color(0, 200, 0) : new Color(200, 0, 0));
+	        adminBtn.setForeground(Color.WHITE);
+	        modBtn.setForeground(Color.WHITE);
+
+	        int index = i; // for lambda access
+
+	        // When admin is toggled 
+	        adminBtn.addActionListener(new ActionListener() { // Delete if we don't want admin to change
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                String newVal = adminBtn.getText().equals("true") ? "false" : "true";
+	                adminBtn.setText(newVal);
+	                adminBtn.setBackground(newVal.equals("true") ? new Color(0, 200, 0) : new Color(200, 0, 0));
+	                users.get(index)[2] = "Admin: " + newVal;
+
+	                // Rewrite Accounts.txt immediately
+	                try {
+	                    FileWriter fw = new FileWriter("DataFiles/Accounts.txt", false);
+	                    for (String[] u : users) {
+	                        fw.write(u[0] + "\n");
+	                        fw.write(u[1] + "\n");
+	                        fw.write(u[2] + "\n");
+	                        fw.write(u[3] + "\n");
+	                    }
+	                    fw.close();
+	                } catch (IOException ex) {
+	                    JOptionPane.showMessageDialog(modFrame, "Error updating Accounts.txt");
+	                }
+	            }
+	        });
+
+	        // When mod is toggled
+	        modBtn.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                String newVal = modBtn.getText().equals("true") ? "false" : "true";
+	                modBtn.setText(newVal);
+	                modBtn.setBackground(newVal.equals("true") ? new Color(0, 200, 0) : new Color(200, 0, 0));
+	                users.get(index)[3] = "Mod: " + newVal;
+
+	                // Rewrite Accounts.txt immediately
+	                try {
+	                    FileWriter fw = new FileWriter("DataFiles/Accounts.txt", false);
+	                    for (String[] u : users) {
+	                        fw.write(u[0] + "\n");
+	                        fw.write(u[1] + "\n");
+	                        fw.write(u[2] + "\n");
+	                        fw.write(u[3] + "\n");
+	                    }
+	                    fw.close();
+	                } catch (IOException ex) {
+	                    JOptionPane.showMessageDialog(modFrame, "Error updating Accounts.txt");
+	                }
+	            }
+	        });
+
+	        mainPanel.add(uLabel);
+	        mainPanel.add(pLabel);
+	        mainPanel.add(adminBtn); // Delete if we don't want admin to change 
+	        mainPanel.add(modBtn);
+	    }
+
+	    // Home button at bottom
+	    JButton homeBtn = new JButton("Back to Home");
+	    homeBtn.setBounds(430, 650, 150, 30);
+	    homeBtn.setBackground(Color.WHITE);
+	    homeBtn.setFont(new Font("Arial", Font.BOLD, 14));
+	    modFrame.add(homeBtn);
+
+	    homeBtn.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            modFrame.setVisible(false);
+	            home(user, pass, admin, mod);
+	        }
+	    });
 	}
 	
 	public static void login() throws FileNotFoundException {
