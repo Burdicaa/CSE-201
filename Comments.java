@@ -74,8 +74,8 @@ public class Comments {
                 String comment = newComment.getText().trim();
                 if (!comment.isEmpty()) {
                     try (FileWriter writer = new FileWriter(commentFile, true)) {
-                        writer.write(comment + "\n");
-                        commentArea.append(comment + "\n");
+                        writer.write(usr + ": " + comment + "\n");
+                        commentArea.append(usr + ": " + comment + "\n");
                         newComment.setText("");
                     } catch (IOException ex) {
                         ex.printStackTrace();
