@@ -49,7 +49,7 @@ public class Gallery {
 		});
 
         for (ArtPiece art : pieces) {
-            mainPanel.add(createArtPanel(art));
+            mainPanel.add(createArtPanel(art, frame));
             mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         }
 
@@ -113,7 +113,7 @@ public class Gallery {
         return new ArrayList<>(keywords);
     }
 
-    private JPanel createArtPanel(ArtPiece art) {
+    private JPanel createArtPanel(ArtPiece art, JFrame frame) {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         panel.setLayout(new BorderLayout(10, 10));
@@ -146,7 +146,8 @@ public class Gallery {
         comments.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Comments c = new Comments(usr, pass, admin, mod, fileName);
+        		frame.setVisible(false);
+        		Comments c = new Comments(art.title, usr, pass, admin, mod);
         		
         	}
         });

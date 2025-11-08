@@ -17,7 +17,7 @@ public class Comments {
         frame.setVisible(true);
 
         // Home button
-        JButton homeBtn = new JButton("Home");
+        JButton homeBtn = new JButton("Gallery");
         homeBtn.setBounds(10, 10, 100, 25);
         frame.add(homeBtn);
         homeBtn.addActionListener(new ActionListener() {
