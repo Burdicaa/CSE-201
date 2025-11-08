@@ -9,7 +9,7 @@ Mod: false
 user3
 password
 Admin: false
-Mod: false
+Mod: true
 user4
 password
 Admin: false
