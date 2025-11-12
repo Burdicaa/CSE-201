@@ -99,7 +99,7 @@ public class UI {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		home.setVisible(false);
-        		searchPage(user, pass, admin, mod);
+        		Search.searchPage(user, pass, admin, mod);
         	}
         });
 		
@@ -127,26 +127,6 @@ public class UI {
         });
         
 	}
-
-
-	public static void searchPage(String user, String pass, String admin, String mod) {
-		JFrame sPage = new JFrame("Search");
-		sPage.setSize(1000, 800);
-		sPage.setLayout(null);
-        sPage.getContentPane().setBackground(Color.decode("#E9DAC4"));
-		sPage.setVisible(true);
-		
-		JButton home = new JButton("Home");
-		home.setBounds(10, 10, 100, 25);
-		sPage.add(home);
-		
-		home.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sPage.setVisible(false);
-				home(user, pass, admin, mod);
-			}
-		});
 		
 		// Displays the search bar and prompts user for a keyword to search
 		JLabel searchLabel = new JLabel("Search keyword:");
@@ -693,6 +673,7 @@ public class UI {
         }
 
 }
+
 
 
 
