@@ -237,9 +237,16 @@ public class UI {
 		JLabel submitSuccess = new JLabel("Form Successfully Submitted");
 		submitSuccess.setBounds(410, 410, 230, 20);
 		submitSuccess.setForeground(Color.BLUE);
-		submitSuccess.setOpaque(true);
+		submitSuccess.setOpaque(false);
 		form.add(submitSuccess);
 		submitSuccess.setVisible(false);
+		
+		JLabel submitFail = new JLabel("Submission Failed. No Sections Can Be Empty");
+		submitFail.setBounds(360, 410, 300, 20);
+		submitFail.setForeground(Color.RED);
+		submitFail.setOpaque(false);
+		form.add(submitFail);
+		submitFail.setVisible(false);
 		
 		// Home Button
 		JButton home = new JButton("Home");
@@ -251,25 +258,37 @@ public class UI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Opens and write data into a file
+				boolean check = false;
 				try {
-					FileWriter submission = new FileWriter("DataFiles/Submissions.txt", true);
-					RandomAccessFile file = new RandomAccessFile("DataFiles/Submissions.txt", "rw");
-					file.seek(file.length());
-					submission.write(creator.getText() + "\n");
-					submission.write(year.getText() + "\n");
-					submission.write(name.getText() + "\n");
-					submission.write(image.getText() + "\n");
-					submission.write(museum.getText() + "\n");
-					submission.write(worth.getText() + "\n");
-					submission.write(attributes.getText() + "\n");
-					submission.write("+" + desc.getText() + "+\n");
-					submission.close();
-					file.close();
+					if (creator.getText().equals("") || year.getText().equals("") || name.getText().equals("") ||
+							image.getText().equals("") || museum.getText().equals("") || worth.getText().equals("") 
+							|| attributes.getText().equals("") || desc.getText().equals("")) {
+						submitFail.setVisible(true);
+					}
+					else {
+						FileWriter submission = new FileWriter("DataFiles/Submissions.txt", true);
+						RandomAccessFile file = new RandomAccessFile("DataFiles/Submissions.txt", "rw");
+						file.seek(file.length());
+						submission.write(creator.getText() + "\n");
+						submission.write(year.getText() + "\n");
+						submission.write(name.getText() + "\n");
+						submission.write(image.getText() + "\n");
+						submission.write(museum.getText() + "\n");
+						submission.write(worth.getText() + "\n");
+						submission.write(attributes.getText() + "\n");
+						submission.write("+" + desc.getText() + "+\n");
+						submission.close();
+						file.close();
+						check = true;
+					}
 				} catch (IOException q) {
 					System.out.println("An error occurred: " + q.getMessage());
 				}
 				// Displays text telling user form was submitted successfully
-				submitSuccess.setVisible(true);
+				if (check == true) {
+					submitFail.setVisible(false);
+					submitSuccess.setVisible(true);
+				}
 			}
 		});
 		
