@@ -12,6 +12,8 @@ public class Search {
 	public static String keyword;
 	public static ArrayList<ArtPiece> piecesKey;
 	public static Gallery newGallery;
+
+	
 	
 	public static void searchPage(String user, String pass, String admin, String mod) {
 		JFrame sPage = new JFrame("Search");

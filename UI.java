@@ -128,14 +128,7 @@ public class UI {
         
 	}
 		
-		// Displays the search bar and prompts user for a keyword to search
-		JLabel searchLabel = new JLabel("Search keyword:");
-		searchLabel.setBounds(300, 10, 100, 100);
-		JTextField searchBox = new JTextField();
-        searchBox.setBounds(420, 50, 300, 30);
-        sPage.add(searchLabel);
-        sPage.add(searchBox);
-	}
+
 	
 	public static void pieceForm(String user, String pass, String admin, String mod) {
 		JFrame form = new JFrame("Piece Submission");
@@ -553,6 +546,7 @@ public class UI {
 	        }
 	    });
 	}
+
 	
 	public static void login() throws FileNotFoundException {
 		// Creates the login screen
