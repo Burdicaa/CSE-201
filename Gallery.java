@@ -12,10 +12,10 @@ import java.util.List;
 public class Gallery {
 	
     public ArrayList<ArtPiece> pieces;
-    public String usr;
-    public String pass;
-    public String admin;
-    public String mod;
+    public static String usr;
+    public static String pass;
+    public static String admin;
+    public static String mod;
     public String fileName;
 
     public Gallery(String usr, String pass, String admin, String mod, String fileName) {
@@ -25,6 +25,10 @@ public class Gallery {
     	this.mod = mod;
     	this.fileName = fileName;
         this.pieces = loadPieces(fileName);
+    }
+    
+    public Gallery() {
+    	
     }
 
     public void disp() {
@@ -49,6 +53,42 @@ public class Gallery {
 		});
 
         for (ArtPiece art : pieces) {
+            mainPanel.add(createArtPanel(art, frame));
+            mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        }
+
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        // Sets it so the scrollpane starts at the top rather than at position of
+        // last added piece
+        SwingUtilities.invokeLater(() ->
+        scrollPane.getVerticalScrollBar().setValue(0));
+
+        frame.add(scrollPane);
+        frame.setVisible(true);
+    }
+    
+    // Creates a Gallery Display for specified Searched Items
+    public void searchDisp(ArrayList<Gallery.ArtPiece> pieces) {
+        JFrame frame = new JFrame("Art Gallery Viewer");
+        frame.setSize(1000, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.decode("#E9DAC4"));
+    
+        JButton search = new JButton("Search");
+        search.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        mainPanel.add(search);
+        
+        search.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+        		Search.searchPage(usr, pass, admin, mod);			}
+		});
+
+        for (Gallery.ArtPiece art : pieces) {
             mainPanel.add(createArtPanel(art, frame));
             mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         }
@@ -113,7 +153,7 @@ public class Gallery {
         return new ArrayList<>(keywords);
     }
 
-    private JPanel createArtPanel(ArtPiece art, JFrame frame) {
+    private static JPanel createArtPanel(ArtPiece art, JFrame frame) {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         panel.setLayout(new BorderLayout(10, 10));
@@ -266,10 +306,9 @@ public class Gallery {
 
         return panel;
     }
-
-    
-    private ArrayList<ArtPiece> loadPieces(String fileName) {
-        ArrayList<ArtPiece> list = new ArrayList<>();
+  
+    static ArrayList<ArtPiece> loadPieces(String fileName) {
+        ArrayList<Gallery.ArtPiece> list = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -311,8 +350,8 @@ public class Gallery {
                 }
 
                 String description = descBuilder.toString().trim();
-
-                list.add(new ArtPiece(artist, year, title, imageFile, museum, value, tags, description));
+                
+                list.add(new Gallery().new ArtPiece(artist, year, title, imageFile, museum, value, tags, description));
 
                 while ((line = reader.readLine()) != null && line.trim().isEmpty()) {
                 }
@@ -353,7 +392,7 @@ public class Gallery {
 
                     description = descBuilder.toString().trim();
 
-                    list.add(new ArtPiece(artist, year, title, imageFile, museum, value, tags, description));
+                    list.add(new Gallery().new ArtPiece(artist, year, title, imageFile, museum, value, tags, description));
                 }
             }
         } catch (IOException e) {
@@ -363,10 +402,7 @@ public class Gallery {
         return list;
     }
     
-
-    
-    
-    private class ArtPiece {
+    class ArtPiece {
         String artist;
         int year;
         String title;

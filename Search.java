@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -7,10 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+
 public class Search {
 
 	public static String keyword;
-	public static ArrayList<ArtPiece> piecesKey;
+	public static ArrayList<Gallery.ArtPiece> piecesKey;
 	public static Gallery newGallery;
 
 	
@@ -19,6 +21,7 @@ public class Search {
 		JFrame sPage = new JFrame("Search");
 		sPage.setSize(1000, 800);
 		sPage.setLayout(null);
+        sPage.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		sPage.setVisible(true);
 		
 		JButton home = new JButton("Home");
@@ -50,49 +53,72 @@ public class Search {
 				if (searchBox.getText().toLowerCase().equals("")) {
 					System.out.println("No key entered.");
 				} else {
-					searchKey(searchBox.getText().toLowerCase());
+					ArrayList<Gallery.ArtPiece> temp = searchKey(searchBox.getText());
+					sPage.setVisible(false);
+					Gallery searchG = new Gallery(user,pass,admin,mod,"DataFiles/AcceptedPieces.txt");
+					searchG.searchDisp(temp);
+					
 				}
 			}
 		});
         
 	}
 	
-	public static Gallery searchKey(String key) {
+	public static ArrayList<Gallery.ArtPiece> searchKey(String key) throws NumberFormatException {
+		piecesKey = new ArrayList<>();
 		
-		if (key.equals(null)) {
+		if (key == null) {
 			System.out.println("No keyword selected");
-			return newGallery;
+			return piecesKey;
 		}
 		
 		keyword = key;
-		ArrayList<ArtPiece> temp = Gallery.pieces;
+		ArrayList<Gallery.ArtPiece> temp = null;
+		try {
+			temp = Gallery.loadPieces("Datafiles/AcceptedPieces.txt");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		for (int i = 0; i < temp.size(); i++) {
 			if (temp.get(i).artist.contains(key)) {
-				piecesKey.add(temp.get(i));
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}
 			} else if (temp.get(i).description.contains(key)) {
-				piecesKey.add(temp.get(i));
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}			
 			} else if (temp.get(i).museum.contains(key)) {
-				piecesKey.add(temp.get(i));
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}
 			} else if (temp.get(i).title.contains(key)){
-				piecesKey.add(temp.get(i));
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}
 			}
 			
+//			int keynumb = 0;
 			for (int j = 0; j < temp.get(i).tags.length; j++) {
 				if (temp.get(i).tags[j].contains(key)) {
-					piecesKey.add(temp.get(i));
+					if (!piecesKey.contains(temp.get(i))) {
+						piecesKey.add(temp.get(i));
+					}
+				//					keynumb = Integer.parseInt(key);
 					break;
 				}
 			}
 			
-			if (temp.get(i).value == Integer.parseInt(key)) {
-				piecesKey.add(temp.get(i));
-			} else if (temp.get(i).year == Integer.parseInt(key)) {
-				piecesKey.add(temp.get(i));
-			}
+//			if (temp.get(i).value == keynumb) {
+//				piecesKey.add(temp.get(i));
+//			} else if (temp.get(i).year == keynumb) {
+//				piecesKey.add(temp.get(i));
+//			}
 		}
 		
-		return newGallery;
+		return piecesKey;
 	}
 	
 	public String getKeyword() {
