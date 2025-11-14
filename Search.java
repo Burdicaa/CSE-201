@@ -73,6 +73,7 @@ public class Search {
 		}
 		
 		keyword = key;
+		key = key.toLowerCase();
 		ArrayList<Gallery.ArtPiece> temp = null;
 		try {
 			temp = Gallery.loadPieces("Datafiles/AcceptedPieces.txt");
@@ -82,40 +83,42 @@ public class Search {
 		}
 		
 		for (int i = 0; i < temp.size(); i++) {
-			if (temp.get(i).artist.contains(key)) {
+			if (temp.get(i).artist.toLowerCase().contains(key)) {
 				if (!piecesKey.contains(temp.get(i))) {
 					piecesKey.add(temp.get(i));
 				}
-			} else if (temp.get(i).description.contains(key)) {
+			} else if (temp.get(i).description.toLowerCase().contains(key)) {
 				if (!piecesKey.contains(temp.get(i))) {
 					piecesKey.add(temp.get(i));
 				}			
-			} else if (temp.get(i).museum.contains(key)) {
+			} else if (temp.get(i).museum.toLowerCase().contains(key)) {
 				if (!piecesKey.contains(temp.get(i))) {
 					piecesKey.add(temp.get(i));
 				}
-			} else if (temp.get(i).title.contains(key)){
+			} else if (temp.get(i).title.toLowerCase().contains(key)){
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}
+			} else if (Integer.toString(temp.get(i).value).toLowerCase().contains(key)) {
+				if (!piecesKey.contains(temp.get(i))) {
+					piecesKey.add(temp.get(i));
+				}
+
+			} else if (Integer.toString(temp.get(i).year).toLowerCase().contains(key)) {
 				if (!piecesKey.contains(temp.get(i))) {
 					piecesKey.add(temp.get(i));
 				}
 			}
 			
-//			int keynumb = 0;
 			for (int j = 0; j < temp.get(i).tags.length; j++) {
-				if (temp.get(i).tags[j].contains(key)) {
+				if (temp.get(i).tags[j].toLowerCase().contains(key)) {
 					if (!piecesKey.contains(temp.get(i))) {
 						piecesKey.add(temp.get(i));
 					}
-				//					keynumb = Integer.parseInt(key);
 					break;
 				}
 			}
 			
-//			if (temp.get(i).value == keynumb) {
-//				piecesKey.add(temp.get(i));
-//			} else if (temp.get(i).year == keynumb) {
-//				piecesKey.add(temp.get(i));
-//			}
 		}
 		
 		return piecesKey;
