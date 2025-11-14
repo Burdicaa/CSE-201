@@ -74,14 +74,10 @@ public class Comments {
                 String comment = newComment.getText().trim();
                 if (!comment.isEmpty()) {
                     try (FileWriter writer = new FileWriter(commentFile, true)) {
-                    	if (usr == null) {
-                            writer.write( "Guest: " + comment + "\n");
-                            commentArea.append("Guest: " + comment + "\n");
-                    	}
-                    	else {
+                    	if (usr != null) {
                     		writer.write(usr + ": " + comment + "\n");
                     		commentArea.append(usr + ": " + comment + "\n");
-                    	}
+                    	} 
                         newComment.setText("");
                     } catch (IOException ex) {
                         ex.printStackTrace();
