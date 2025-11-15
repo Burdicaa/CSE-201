@@ -1,8 +1,11 @@
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +29,8 @@ public class Search {
 		
 		JButton home = new JButton("Home");
 		home.setBounds(10, 10, 100, 25);
+		home.setForeground(Color.decode("#4C474A"));
+		home.setFont(new Font("Arial", Font.BOLD, 16));
 		sPage.add(home);
 		
 		home.addActionListener(new ActionListener() {
@@ -36,13 +41,25 @@ public class Search {
 			}
 		});
 		
+        ImageIcon headerIcon = new ImageIcon("Pictures/Screenshot 2025-11-14 211713.png");
+
+        // Scale image to fit the top of the window
+        Image scaledHeader = headerIcon.getImage().getScaledInstance(500, 200, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(scaledHeader));
+        headerLabel.setBounds(300, 80, 450, 150); // X, Y, Width, Height
+        sPage.add(headerLabel);
+		
 		// Displays the search bar and prompts user for a keyword to search
 		JLabel searchLabel = new JLabel("Search keyword:");
-		searchLabel.setBounds(300, 10, 100, 100);
+		searchLabel.setBounds(225, 262, 190, 100);
+		searchLabel.setForeground(Color.decode("#4C474A"));
+		searchLabel.setFont(new Font("Arial", Font.BOLD, 20));
 		JTextField searchBox = new JTextField();
-        searchBox.setBounds(420, 50, 250, 30);
+        searchBox.setBounds(420, 300, 250, 30);
         JButton enter = new JButton("Search");
-        enter.setBounds(680, 50, 100, 30);
+        enter.setBounds(695, 300, 100, 30);
+        enter.setForeground(Color.decode("#4C474A"));
+        enter.setFont(new Font("Arial", Font.BOLD, 16));
         sPage.add(searchLabel);
         sPage.add(searchBox);
         sPage.add(enter);
