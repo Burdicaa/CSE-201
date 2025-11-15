@@ -23,24 +23,13 @@ public class UI {
         home.getContentPane().setBackground(Color.decode("#E9DAC4"));
 		home.setVisible(true);
 		
-		// Creates a panel for all button in home
-		JPanel p = new JPanel();
-		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
-		p.setBounds(300,50,400,500);
-		p.setBackground(Color.decode("#E9DAC4"));
-		home.add(p, BorderLayout.CENTER);
-
-		JButton search = new JButton("Search");
-		search.setSize(50, 25);
-		search.setAlignmentX(Component.CENTER_ALIGNMENT);
-		p.add(search);
-		
 		// Creates a button that allows user to change to piece submission form
 		if (user != null && pass != null) {
 			JButton submitPiece = new JButton("Create Piece Submission Form");
-			submitPiece.setSize(50, 50);
-			submitPiece.setAlignmentX(Component.CENTER_ALIGNMENT);
-			p.add(submitPiece);
+			submitPiece.setBounds(350, 550, 350, 40);
+			submitPiece.setFont(new Font("Arial", Font.BOLD, 18));
+			submitPiece.setForeground(Color.decode("#4C474A"));
+			home.add(submitPiece);
 		
 			// Checks for button press and changes screen
         	submitPiece.addActionListener(new ActionListener() {
@@ -53,22 +42,40 @@ public class UI {
 		
 		}
 		
+        ImageIcon headerIcon = new ImageIcon("Pictures/Screenshot 2025-11-14 201732.png");
+
+        // Scale image to fit the top of the window
+        Image scaledHeader = headerIcon.getImage().getScaledInstance(500, 200, Image.SCALE_SMOOTH);
+        JLabel headerLabel = new JLabel(new ImageIcon(scaledHeader));
+        headerLabel.setBounds(300, 80, 450, 150); // X, Y, Width, Height
+        home.add(headerLabel);
+		
+		JButton search = new JButton("Search");
+		search.setBounds(450, 350, 150, 40);
+		search.setMargin(new Insets(0, 0, 0, 0));
+		search.setFont(new Font("Arial", Font.BOLD, 18));
+		search.setForeground(Color.decode("#4C474A"));
+		home.add(search);
+		
 		JButton gallery = new JButton("Gallery");
-		gallery.setSize(50,50);
-		gallery.setAlignmentX(Component.CENTER_ALIGNMENT);
-		p.add(gallery);
+		gallery.setBounds(450, 300, 150, 40);
+		gallery.setFont(new Font("Arial", Font.BOLD, 18));
+		gallery.setForeground(Color.decode("#4C474A"));
+		home.add(gallery);
 		
 		
 		if (admin != null && admin.equals("Admin: true")) {
 			JButton pieceReview = new JButton("Review Piece Applications");
-			pieceReview.setSize(50,50);
-			pieceReview.setAlignmentX(Component.CENTER_ALIGNMENT);
-			p.add(pieceReview);
+			pieceReview.setBounds(375, 450, 300, 40);
+			pieceReview.setFont(new Font("Arial", Font.BOLD, 18));
+			pieceReview.setForeground(Color.decode("#4C474A"));
+			home.add(pieceReview);
 			
 			JButton modUser = new JButton("Change User to Moderator");
-			modUser.setSize(50, 50);
-			modUser.setAlignmentX(Component.CENTER_ALIGNMENT);
-			p.add(modUser);
+			modUser.setBounds(375, 500, 300, 40);
+			modUser.setFont(new Font("Arial", Font.BOLD, 18));
+			modUser.setForeground(Color.decode("#4C474A"));
+			home.add(modUser);
 			
 	        pieceReview.addActionListener(new ActionListener() {
 	        	@Override
@@ -89,9 +96,10 @@ public class UI {
 		}
 		
 		JButton logout = new JButton("Logout");
-		logout.setSize(50,25);
-		logout.setAlignmentX(Component.CENTER_ALIGNMENT);
-		p.add(logout);
+		logout.setBounds(450, 650, 150, 40);
+		logout.setFont(new Font("Arial", Font.BOLD, 18));
+		logout.setForeground(Color.decode("#4C474A"));
+		home.add(logout);
 		
 		
 		// Checks for button press and changes screen
