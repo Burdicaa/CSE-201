@@ -149,27 +149,43 @@ public class UI {
 		JLabel nameSubmission = new JLabel();
 		nameSubmission.setText("Name of piece: ");
 		nameSubmission.setBounds(380, 10, 100, 100);
+		nameSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		nameSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel creatorSubmission = new JLabel();
 		creatorSubmission.setText("Creator of piece: ");
 		creatorSubmission.setBounds(380, 40, 100, 100);
+		creatorSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		creatorSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel yearSubmission = new JLabel();
 		yearSubmission.setText("Year created: ");
 		yearSubmission.setBounds(380, 70, 100, 100);
+		yearSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		yearSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel worthSubmission = new JLabel();
 		worthSubmission.setText("Worth: ");
 		worthSubmission.setBounds(380, 100, 100, 100);
+		worthSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		worthSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel museumSubmission = new JLabel();
 		museumSubmission.setText("Museum located: ");
 		museumSubmission.setBounds(380, 130, 100, 100);
+		museumSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		museumSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel attributesSub = new JLabel();
 		attributesSub.setText("Attributes: ");
 		attributesSub.setBounds(380,160,100,100);
+		attributesSub.setFont(new Font("Arial", Font.BOLD, 12));
+		attributesSub.setForeground(Color.decode("#4C474A"));
 		JLabel imageSubmission = new JLabel();
 		imageSubmission.setText("Image URL: ");
 		imageSubmission.setBounds(380, 190, 100, 100);
+		imageSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		imageSubmission.setForeground(Color.decode("#4C474A"));
 		JLabel descSubmission = new JLabel();
 		descSubmission.setText("Description: ");
 		descSubmission.setBounds(380, 220, 100, 100);
+		descSubmission.setFont(new Font("Arial", Font.BOLD, 12));
+		descSubmission.setForeground(Color.decode("#4C474A"));
 		
 		JTextField name = new JTextField();
 		name.setBounds(480, 40, 130, 30);
@@ -212,6 +228,8 @@ public class UI {
 		// Submit button to properly add all data into a holding file for confirmation
 		JButton submit = new JButton("Submit");
 		submit.setBounds(440, 380, 100, 25);
+		submit.setFont(new Font("Arial", Font.BOLD, 14));
+		submit.setForeground(Color.decode("#4C474A"));
 		form.add(submit);
 		
 		// Submission Successful Indicator Text
@@ -232,6 +250,8 @@ public class UI {
 		// Home Button
 		JButton home = new JButton("Home");
 		home.setBounds(10, 10, 100, 25);
+		home.setFont(new Font("Arial", Font.BOLD, 14));
+		home.setForeground(Color.decode("#4C474A"));
 		form.add(home);
 		
 		// Actions after pressing submit button
